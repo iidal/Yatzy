@@ -121,10 +121,9 @@ public class DiceParent : MonoBehaviour
             List<int> temp = new List<int>();
             foreach (KeyValuePair<int,int> kvp in results) {
                 temp.Add(kvp.Value);
-                Debug.Log(kvp.Value);
             }
             GameManager.instance.GetNumbers(temp);
-            // results.Clear();
+            results.Clear();
             newResults = 0;
         }
         
