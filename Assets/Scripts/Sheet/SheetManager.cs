@@ -4,25 +4,25 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Linq;
+
 public class SheetManager : MonoBehaviour
 {
-    public static SheetManager instance;
-    
-    public int[] currentDices = new int [5];
-    public Button playButton;
-
-    public TextMeshProUGUI[] upperLines;
-    public TextMeshProUGUI upperLinesBonus;
-
-    
-    public Toggle[] lineToggles;
-
-
+   
 
     /// <summary>
     ///    LETS TRY THIS AGAIN
     /// </summary>
     /// 
+    /// 
+
+    public static SheetManager instance;
+    public Button playButton;
+    public TextMeshProUGUI allPointsText;
+
+    int allPoints;
+
+    public int[] currentDices = new int [5];
+
     public SingleLine[] sheetLines;
     public GameObject linePrefab;
     public GameObject lineParent; //holds the lines
@@ -33,6 +33,8 @@ public class SheetManager : MonoBehaviour
     Dictionary<int, string> lineNames = new Dictionary<int, string>();
     Dictionary<int, int> lineScores = new Dictionary<int, int>();
     Dictionary<int, bool> playedLines = new Dictionary<int, bool>();
+
+
     /////////////
 
     private void Awake()
@@ -53,8 +55,25 @@ public class SheetManager : MonoBehaviour
 
     public void PlayRound() {
 
-        Debug.Log("coming soon");
+        Toggle chosenToggle = lineToggleGroup.ActiveToggles().FirstOrDefault();
+        SingleLine sl = chosenToggle.GetComponent<SingleLine>();
+        sl.PlayThis();
+
+        GameManager.instance.playerInTurn.AddToPoints(sl.points);
+
+        GameManager.instance.StartNextTurn();
+        //allPoints += sl.points;
+        //allPointsText.text = allPoints.ToString();
         
+    }
+
+
+    public void CalculateLines(int[]line) {
+       
+        currentDices = line;
+        LineCalculator.StartCalculating(sheetLines, currentDices);
+
+   
     }
     //If a line is selected play button can be pressed
     public void CheckPlayButton() {
@@ -64,15 +83,6 @@ public class SheetManager : MonoBehaviour
             playButton.interactable = false;
 
     }
-
-    public void CalculateLines(int[]line) {
-       
-        currentDices = line;
-        LineCalculator.StartCalculating(sheetLines, currentDices);
-
-   
-    }
-
 
     /*
      *Creating lines

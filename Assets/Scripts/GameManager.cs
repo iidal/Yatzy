@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     public int[] numbers = new int[5];
     public TextMeshProUGUI numberLine;
 
+    public PlayerScript[] players = new PlayerScript[1];
+    [HideInInspector]
+    public PlayerScript playerInTurn;
+
     private void Awake()
     {
         if (instance != null)
@@ -22,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        playerInTurn = players[0];
     }
 
 
@@ -40,6 +44,14 @@ public class GameManager : MonoBehaviour
         }
         numberLine.text = s;
         SheetManager.instance.CalculateLines(numbers);
+    }
+
+    public void WaitingForNextTurn() {
+        DiceParent.instance.RoundEnded();
+    }
+    public void StartNextTurn() {
+        DiceParent.instance.ThrowButton.interactable = true;
+
     }
 
 

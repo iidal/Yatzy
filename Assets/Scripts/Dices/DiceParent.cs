@@ -14,6 +14,8 @@ public class DiceParent : MonoBehaviour
     public Button[] diceButtons;
     public Transform[] throwPositions = new Transform[2];
 
+    public Button ThrowButton;
+
     public bool dicesThrown = false;
     public Dictionary<int, int> results = new Dictionary<int, int>();
     //List<int> results = new List<int>();
@@ -21,7 +23,7 @@ public class DiceParent : MonoBehaviour
 
     int diceAmount = 5;
 
-
+    #region Game start
     private void Awake()
     {
         if (instance != null)
@@ -53,7 +55,9 @@ public class DiceParent : MonoBehaviour
 
 
     }
+    #endregion
 
+    #region Throwing
     public void ThrowDices() {
         StartCoroutine("Throw", 1);
     }
@@ -104,6 +108,7 @@ public class DiceParent : MonoBehaviour
         }
         
     }
+    #endregion
 
     public void GetResults(int result, int id) {
         int value;
@@ -129,4 +134,7 @@ public class DiceParent : MonoBehaviour
         
     }
 
+    public void RoundEnded() {
+        ThrowButton.interactable = false;
+    }
 }

@@ -40,7 +40,7 @@ public class DiceManager : MonoBehaviour
         {
             if (!diceStopped &&DiceParent.instance.dicesThrown == true) {
                 //if dices start landing with an edge on floor(not on side) check that atleast one rotation axis is zero
-                Debug.Log("dicestopped");
+                //Debug.Log("dicestopped");
                 diceStopped = true;
                 GetResult();
 
@@ -81,7 +81,7 @@ public class DiceManager : MonoBehaviour
             }
         }
         textTemp.text = result.ToString();
-        Debug.Log("sending numbers");
+        //Debug.Log("sending numbers");
         DiceParent.instance.GetResults(result, id);
     }
 

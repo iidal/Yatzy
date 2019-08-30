@@ -38,6 +38,13 @@ public class SingleLine : MonoBehaviour
 
     }
 
+    public void PlayThis() {
+        scoreText.enabled = false;
+        chosenScoreText.text = points.ToString();
+        toggle.interactable = false;
+        toggle.isOn = false;
+    }
+
     public void ValueChange() {
         SheetManager.instance.CheckPlayButton();
     }
