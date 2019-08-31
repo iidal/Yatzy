@@ -40,7 +40,7 @@ public class PlayerScript : MonoBehaviour
 
             throwsUsed++;
         }
-        else {
+        if (throwsUsed >= throwsPerRound ) {
             Debug.Log("three throws");
             GameManager.instance.WaitingForNextTurn();
         }

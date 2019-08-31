@@ -15,17 +15,22 @@ public class LineCalculator
             type = sl.lineType;
 
             //upper part
-            if (type.Contains("upper")) {
+            if (type.Contains("upper"))
+            {
                 CalculateUpperPart(sl);
             }
+            else
+            {
 
-            switch (type) {
-                case "test":
-                    Debug.Log("test");
-                    break;
-                defult:
-                    Debug.Log("default");
-                    break;
+                switch (type)
+                {
+                    case "test":
+                        Debug.Log("test");
+                        break;
+                    default:
+                        Debug.Log("default");
+                        break;
+                }
             }
         }
     }

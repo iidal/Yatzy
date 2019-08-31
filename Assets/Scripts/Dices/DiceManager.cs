@@ -95,7 +95,7 @@ public class DiceManager : MonoBehaviour
     }
 
     //Toggle dices lock state
-    void ToggleLocked() {
+    public void ToggleLocked() {
         if (isLocked)
             isLocked = false;
         else

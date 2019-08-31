@@ -7,19 +7,10 @@ using System.Linq;
 
 public class SheetManager : MonoBehaviour
 {
-   
-
-    /// <summary>
-    ///    LETS TRY THIS AGAIN
-    /// </summary>
-    /// 
-    /// 
 
     public static SheetManager instance;
     public Button playButton;
-    public TextMeshProUGUI allPointsText;
 
-    int allPoints;
 
     public int[] currentDices = new int [5];
 
@@ -27,8 +18,9 @@ public class SheetManager : MonoBehaviour
     public GameObject linePrefab;
     public GameObject lineParent; //holds the lines
 
-    public ToggleGroup lineToggleGroup;  
-    
+    public ToggleGroup lineToggleGroup;
+
+    public GameObject clickBlocker;
     //if needed
     Dictionary<int, string> lineNames = new Dictionary<int, string>();
     Dictionary<int, int> lineScores = new Dictionary<int, int>();
@@ -48,7 +40,7 @@ public class SheetManager : MonoBehaviour
     {
         playButton.interactable = false;
         CreateSheet();    //get lines from a text file and set up both line dictionaries
-
+        clickBlocker.SetActive(true);
     }
 
 
@@ -62,9 +54,8 @@ public class SheetManager : MonoBehaviour
         GameManager.instance.playerInTurn.AddToPoints(sl.points);
 
         GameManager.instance.StartNextTurn();
-        //allPoints += sl.points;
-        //allPointsText.text = allPoints.ToString();
-        
+
+        clickBlocker.SetActive(true);
     }
 
 
@@ -72,7 +63,7 @@ public class SheetManager : MonoBehaviour
        
         currentDices = line;
         LineCalculator.StartCalculating(sheetLines, currentDices);
-
+        clickBlocker.SetActive(false);          //lines can ble clicked
    
     }
     //If a line is selected play button can be pressed

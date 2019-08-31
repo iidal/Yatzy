@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DiceParent : MonoBehaviour
 {
@@ -62,6 +63,8 @@ public class DiceParent : MonoBehaviour
         StartCoroutine("Throw", 1);
     }
     public IEnumerator Throw(int i) {
+
+        //adjusting direction where to throw from throw pos
         int dir;
         if (i == 0)
             dir = -1;
@@ -75,6 +78,7 @@ public class DiceParent : MonoBehaviour
         Vector3 throwPos;
 
         foreach (GameObject go in diceObjects) {
+            //only throw if dice has not been locked
             if (go.GetComponent<DiceManager>().isLocked == false ) {
                 go.SetActive(true);
                
@@ -94,13 +98,14 @@ public class DiceParent : MonoBehaviour
                 
                 rbs[index].AddForce(throwForce, ForceMode.Impulse);
                rbs[index].AddTorque(throwTorque, ForceMode.Impulse);
-               
 
+                diceButtons[index].GetComponentInChildren<TextMeshProUGUI>().text = "";
 
                 yield return new WaitForSeconds(0.05f);
             }
             index++;
         }
+
         dicesThrown = true;
 
         foreach (DiceManager dm in diceGMs) {
@@ -136,5 +141,18 @@ public class DiceParent : MonoBehaviour
 
     public void RoundEnded() {
         ThrowButton.interactable = false;
+    }
+    public void StartNewRound() {
+        ThrowButton.interactable = true;
+        foreach (DiceManager dm in diceGMs) {
+            if (dm.isLocked)
+            {
+                dm.ToggleLocked();
+            }
+            
+        }
+        foreach (Button db in diceButtons) {
+            db.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        }
     }
 }

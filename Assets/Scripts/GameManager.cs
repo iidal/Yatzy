@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 
   
     public int[] numbers = new int[5];
-    public TextMeshProUGUI numberLine;
 
     public PlayerScript[] players = new PlayerScript[1];
     [HideInInspector]
@@ -38,11 +37,6 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i<results.Count; i++) {
             numbers[i] = results[i];
         }
-        string s = "-";
-        foreach (int i in numbers) {
-            s += i.ToString()+ "-";
-        }
-        numberLine.text = s;
         SheetManager.instance.CalculateLines(numbers);
     }
 
@@ -50,7 +44,7 @@ public class GameManager : MonoBehaviour
         DiceParent.instance.RoundEnded();
     }
     public void StartNextTurn() {
-        DiceParent.instance.ThrowButton.interactable = true;
+        DiceParent.instance.StartNewRound();
 
     }
 
