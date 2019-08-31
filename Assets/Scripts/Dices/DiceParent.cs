@@ -18,6 +18,9 @@ public class DiceParent : MonoBehaviour
     public Button ThrowButton;
 
     public bool dicesThrown = false;
+    public bool allDicesStopped = false;
+
+
     public Dictionary<int, int> results = new Dictionary<int, int>();
     //List<int> results = new List<int>();
     public int newResults = 0; //new results from not locked dices
@@ -79,6 +82,8 @@ public class DiceParent : MonoBehaviour
 
         foreach (GameObject go in diceObjects) {
             //only throw if dice has not been locked
+                 
+
             if (go.GetComponent<DiceManager>().isLocked == false ) {
                 go.SetActive(true);
                
@@ -100,14 +105,15 @@ public class DiceParent : MonoBehaviour
                rbs[index].AddTorque(throwTorque, ForceMode.Impulse);
 
                 diceButtons[index].GetComponentInChildren<TextMeshProUGUI>().text = "";
-
-                yield return new WaitForSeconds(0.05f);
             }
+
+
+            diceButtons[index].interactable = false; //cant be clicked when moving 
             index++;
         }
 
         dicesThrown = true;
-
+    
         foreach (DiceManager dm in diceGMs) {
             dm.diceStopped = false;
         }
@@ -115,15 +121,17 @@ public class DiceParent : MonoBehaviour
     }
     #endregion
 
+    //results from dices, not the played points
     public void GetResults(int result, int id) {
-        int value;
         newResults++;
-        if (results.TryGetValue(id, out value))
+    
+        if (results.TryGetValue(id, out int value))
         {
             results[id] = result;
         }
-        else {
-            results.Add(id,result);
+        else
+        {
+            results.Add(id, result);
         }
 
 
@@ -135,6 +143,11 @@ public class DiceParent : MonoBehaviour
             GameManager.instance.GetNumbers(temp);
             results.Clear();
             newResults = 0;
+            //allDicesStopped = true;
+            dicesThrown = false;
+            foreach (Button b in diceButtons) {
+                b.interactable = true;
+            }
         }
         
     }

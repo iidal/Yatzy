@@ -13,6 +13,12 @@ public class GameManager : MonoBehaviour
     public PlayerScript[] players = new PlayerScript[1];
     [HideInInspector]
     public PlayerScript playerInTurn;
+    [HideInInspector]
+    public int throwsUsedPerRound;  //easier access for this info here
+    [HideInInspector]
+    public int throwsPerRound = 3;
+
+    public bool roundEnded;
 
     private void Awake()
     {
@@ -42,10 +48,12 @@ public class GameManager : MonoBehaviour
 
     public void WaitingForNextTurn() {
         DiceParent.instance.RoundEnded();
+        roundEnded = true;
     }
     public void StartNextTurn() {
         DiceParent.instance.StartNewRound();
-
+        throwsUsedPerRound = 0;
+        roundEnded = false;
     }
 
 

@@ -59,12 +59,14 @@ public class SheetManager : MonoBehaviour
     }
 
 
-    public void CalculateLines(int[]line) {
-       
+    public void CalculateLines(int[] line) {
+
         currentDices = line;
         LineCalculator.StartCalculating(sheetLines, currentDices);
-        clickBlocker.SetActive(false);          //lines can ble clicked
-   
+        clickBlocker.SetActive(false);          //lines can be clicked
+        if (!GameManager.instance.roundEnded) { //let player throw again once the dices have stopped moving, except when all throws have been used(round ended p much)
+            DiceParent.instance.ThrowButton.interactable = true;
+        }
     }
     //If a line is selected play button can be pressed
     public void CheckPlayButton() {

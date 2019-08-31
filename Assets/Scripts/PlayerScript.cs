@@ -6,7 +6,7 @@ using TMPro;
 public class PlayerScript : MonoBehaviour
 {
     int points = 0;
-    int throwsPerRound = 3;
+    int throwsPerRound;
     int throwsUsed = 0;
 
     public List<string> linesPlayed = new List<string>();
@@ -17,6 +17,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        throwsPerRound = GameManager.instance.throwsPerRound;
         playersPointsText.text = points.ToString();
     }
 
@@ -37,11 +38,10 @@ public class PlayerScript : MonoBehaviour
     public void MakeThrow() {
         if (throwsUsed < throwsPerRound) {
             DiceParent.instance.ThrowDices();
-
             throwsUsed++;
+            GameManager.instance.throwsUsedPerRound = throwsUsed;
         }
         if (throwsUsed >= throwsPerRound ) {
-            Debug.Log("three throws");
             GameManager.instance.WaitingForNextTurn();
         }
     }

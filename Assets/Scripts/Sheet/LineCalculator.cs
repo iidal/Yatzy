@@ -28,7 +28,6 @@ public class LineCalculator
                         Debug.Log("test");
                         break;
                     default:
-                        Debug.Log("default");
                         break;
                 }
             }

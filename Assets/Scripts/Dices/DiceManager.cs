@@ -30,25 +30,37 @@ public class DiceManager : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rend = GetComponent<Renderer>();
         textTemp = diceButton.GetComponentInChildren<TextMeshProUGUI>();
-        diceButton.onClick.AddListener(ToggleLocked);   
+        diceButton.onClick.AddListener(ToggleLocked);
+        diceButton.interactable= false;
     }
 
     private void Update()
     {
-       
+
         if (rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0)
         {
-            if (!diceStopped &&DiceParent.instance.dicesThrown == true) {
+
+            //if (DiceParent.instance.allDicesStopped)
+            //{
+            //    diceButton.interactable = true;
+            //}
+            if (!diceStopped && DiceParent.instance.dicesThrown == true)
+            {
                 //if dices start landing with an edge on floor(not on side) check that atleast one rotation axis is zero
                 //Debug.Log("dicestopped");
                 diceStopped = true;
+                
                 GetResult();
 
-                
+
             }
         }
+        else {
+            //diceStopped = false;
+            //diceButton.interactable = false;
+        }
 
-        
+
     }
     void GetResult() {
         foreach (DiceCollider dc in sides) {
@@ -81,7 +93,8 @@ public class DiceManager : MonoBehaviour
             }
         }
         textTemp.text = result.ToString();
-        //Debug.Log("sending numbers");
+
+       // diceButton.interactable = true;
         DiceParent.instance.GetResults(result, id);
     }
 
@@ -89,9 +102,9 @@ public class DiceManager : MonoBehaviour
     //When clicking on dice
     private void OnMouseDown()
     {
-        ToggleLocked();
-        Debug.Log("dice locked");
-
+        if (diceButton.interactable) {
+            ToggleLocked();
+        }
     }
 
     //Toggle dices lock state
@@ -106,7 +119,7 @@ public class DiceManager : MonoBehaviour
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
             rend.material = lockedMat;
-            diceButton.GetComponent<Image>().color = Color.grey;
+            diceButton.GetComponent<Image>().color = Color.yellow;
 
         }
         else
