@@ -31,11 +31,24 @@ public class SingleLine : MonoBehaviour
         }
     }
 
-    public void SetPoint(int calcPoints) {
+    //if points are calculated from dices, this is used
+    //with lines like 3x and pairs calcpoints is 0 if requirements are not met 
+    public void SetDicePoints(int calcPoints) {
 
         points = calcPoints;
         scoreText.text = points.ToString();
 
+    }
+    //if points are always the same, for example with yatzy and full house, this is used
+    //lineok = points can be given, if false, give 0
+    public void SetOtherPoints(bool lineOK) {
+        if (lineOK)
+        {
+            scoreText.text = points.ToString();
+        }
+        else {
+            scoreText.text = "0";
+        }
     }
 
     public void PlayThis() {
