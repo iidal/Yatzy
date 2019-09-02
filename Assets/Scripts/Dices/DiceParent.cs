@@ -117,6 +117,7 @@ public class DiceParent : MonoBehaviour
         foreach (DiceManager dm in diceGMs) {
             dm.diceStopped = false;
         }
+        SheetManager.instance.ClearSheet();
         
     }
     #endregion

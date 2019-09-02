@@ -39,7 +39,7 @@ public class PlayerScript : MonoBehaviour
         if (throwsUsed < throwsPerRound) {
             DiceParent.instance.ThrowDices();
             throwsUsed++;
-            GameManager.instance.throwsUsedPerRound = throwsUsed;
+            GameManager.instance.WhenThrowing(throwsUsed);
         }
         if (throwsUsed >= throwsPerRound ) {
             GameManager.instance.WaitingForNextTurn();

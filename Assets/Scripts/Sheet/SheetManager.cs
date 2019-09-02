@@ -21,6 +21,9 @@ public class SheetManager : MonoBehaviour
     public ToggleGroup lineToggleGroup;
 
     public GameObject clickBlocker;
+
+
+
     //if needed
     Dictionary<int, string> lineNames = new Dictionary<int, string>();
     Dictionary<int, int> lineScores = new Dictionary<int, int>();
@@ -56,6 +59,7 @@ public class SheetManager : MonoBehaviour
         GameManager.instance.StartNextTurn();
 
         clickBlocker.SetActive(true);
+
     }
 
 
@@ -75,6 +79,12 @@ public class SheetManager : MonoBehaviour
         else
             playButton.interactable = false;
 
+    }
+
+    //doesnt clear played points, but the toggle that has been clicked but not confirmed
+    //used when throwing 
+    public void ClearSheet() {
+        lineToggleGroup.SetAllTogglesOff();
     }
 
     /*

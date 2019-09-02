@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public bool roundEnded;
 
+    public TextMeshProUGUI throwsLeftText;
+
     private void Awake()
     {
         if (instance != null)
@@ -32,10 +34,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerInTurn = players[0];
+        throwsLeftText.text = "throws left: 3";
     }
 
 
-    
+    public void WhenThrowing(int throwsUsed) {
+        int throwsLeft = throwsPerRound - throwsUsed;
+        throwsLeftText.text = "throws left: " +throwsLeft.ToString();
+    }
 
 
     public void GetNumbers(List<int> results) {
@@ -54,6 +60,9 @@ public class GameManager : MonoBehaviour
         DiceParent.instance.StartNewRound();
         throwsUsedPerRound = 0;
         roundEnded = false;
+
+        //showing that 3 throws left after round has been played, will be changed to something else in the future
+        WhenThrowing(0);
     }
 
 
