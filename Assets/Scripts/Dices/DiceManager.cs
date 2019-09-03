@@ -87,6 +87,7 @@ public class DiceManager : MonoBehaviour
                         break;
                     default:
                         Debug.Log("something is wrong with the dice");
+                        //NudgeDice();
                         break;
                 }
                 break;
@@ -98,6 +99,10 @@ public class DiceManager : MonoBehaviour
         DiceParent.instance.GetResults(result, id);
     }
 
+    //private void NudgeDice() {
+    //    Vector3 nudge = new Vector3(1,0,0);
+    //    rb.AddForce(nudge, ForceMode.Impulse);
+    //}
 
     //When clicking on dice
     private void OnMouseDown()
@@ -129,4 +134,6 @@ public class DiceManager : MonoBehaviour
             diceButton.GetComponent<Image>().color = Color.white;
         }
     }
+
+    
 }

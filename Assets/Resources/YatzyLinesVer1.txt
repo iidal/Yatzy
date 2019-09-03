@@ -4,7 +4,7 @@
 3-Fours-upper4-0
 4-Fives-upper5-0
 5-Sixes-upper6-0
-6-Upper Bonus-upBonus-0
+6-Upper Bonus-upBonus-50
 7-Pair-pair-0
 8-Two Pairs-2pairs-0
 9-3X-3X-0

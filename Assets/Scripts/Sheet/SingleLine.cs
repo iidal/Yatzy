@@ -9,8 +9,8 @@ public class SingleLine : MonoBehaviour
     public int id;  //id for this line
     public string lineName;
     public string lineType;
-    public int points; //if zero, points are calculated from dices
-    int playedPoints;   //
+    public int pointsDefault; //if zero, points are calculated from dices
+    public int points;   //
     bool linePlayed;
     Toggle toggle;
     //Text objects
@@ -23,12 +23,12 @@ public class SingleLine : MonoBehaviour
     private void Start()
     {
         SetTextObjects();
-
         toggle = GetComponent<Toggle>();
         toggle.isOn = false;
-        if (lineType == "upperBonus") {
+        if (lineType == "upBonus") {
             toggle.interactable = false;
         }
+        
     }
 
     //if points are calculated from dices, this is used
@@ -44,21 +44,23 @@ public class SingleLine : MonoBehaviour
     public void SetOtherPoints(bool lineOK) {
         if (lineOK)
         {
+            points = pointsDefault;
             scoreText.text = points.ToString();
         }
         else {
+            points = 0;
             scoreText.text = "0";
         }
     }
 
-    public void PlayThis() {
+    public void PlayThis() {    //this line has been chosen to be played this round
         scoreText.enabled = false;
         chosenScoreText.text = points.ToString();
         toggle.interactable = false;
         toggle.isOn = false;
     }
 
-    public void ValueChange() {
+    public void ValueChange() { //lines toggle has been clicked
         SheetManager.instance.CheckPlayButton();
     }
 

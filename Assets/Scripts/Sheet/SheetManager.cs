@@ -22,7 +22,8 @@ public class SheetManager : MonoBehaviour
 
     public GameObject clickBlocker;
 
-
+    int upperPoints = 0;
+    SingleLine upperBonusLine;
 
     //if needed
     Dictionary<int, string> lineNames = new Dictionary<int, string>();
@@ -60,6 +61,15 @@ public class SheetManager : MonoBehaviour
 
         clickBlocker.SetActive(true);
 
+        if (sl.lineType.Contains("upper")) {
+            upperPoints += sl.points;
+            if (upperPoints >= 63) {
+                Debug.Log("63");
+                upperBonusLine.SetOtherPoints(true);
+                upperBonusLine.PlayThis();
+            }
+        }
+
     }
 
 
@@ -67,6 +77,7 @@ public class SheetManager : MonoBehaviour
 
         currentDices = line;
         LineCalculator.StartCalculating(sheetLines, currentDices);
+
         clickBlocker.SetActive(false);          //lines can be clicked
         if (!GameManager.instance.roundEnded) { //let player throw again once the dices have stopped moving, except when all throws have been used(round ended p much)
             DiceParent.instance.ThrowButton.interactable = true;
@@ -105,8 +116,12 @@ public class SheetManager : MonoBehaviour
             sl.id = System.Int32.Parse(tempLine[0]);            //setting line's id, line name and possible score
             sl.lineName = tempLine[1];
             sl.lineType = tempLine[2];
-            sl.points = System.Int32.Parse(tempLine[3]);
+            sl.pointsDefault = System.Int32.Parse(tempLine[3]);
             lineGo.GetComponent<Toggle>().group = lineParent.GetComponent<ToggleGroup>();   //set lines toggle group
+            if (sl.lineType == "upBonus") {
+                upperBonusLine = sl;
+            }
+
         }
     }
 }
