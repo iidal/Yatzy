@@ -169,4 +169,16 @@ public class DiceParent : MonoBehaviour
             db.GetComponentInChildren<TextMeshProUGUI>().text = "";
         }
     }
+    void HideDices() {
+        foreach (GameObject dice in diceObjects) {
+            dice.SetActive(false); //this could be done with and animation in the future (shrinking maybe)
+        }
+    }
+
+    public void OnNewGameStart() {
+
+        
+        StartNewRound();
+        HideDices();
+    }
 }

@@ -11,14 +11,13 @@ public class PlayerScript : MonoBehaviour
 
     public List<string> linesPlayed = new List<string>();
 
-    public TextMeshProUGUI playersPointsText;
+    public TextMeshProUGUI playersPointsText; 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        throwsPerRound = GameManager.instance.throwsPerRound;
-        playersPointsText.text = points.ToString();
+        OnGameStart();
     }
 
     // Update is called once per frame
@@ -44,5 +43,14 @@ public class PlayerScript : MonoBehaviour
         if (throwsUsed >= throwsPerRound ) {
             GameManager.instance.WaitingForNextTurn();
         }
+    }
+
+    public void OnGameStart() {
+
+        throwsPerRound = GameManager.instance.throwsPerRound;
+
+        points = 0;
+
+        playersPointsText.text = points.ToString();
     }
 }

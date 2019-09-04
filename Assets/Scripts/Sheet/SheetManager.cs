@@ -15,6 +15,7 @@ public class SheetManager : MonoBehaviour
     public int[] currentDices = new int [5];
 
     public SingleLine[] sheetLines;
+    public GameObject[] lineObjects;
     public GameObject linePrefab;
     public GameObject lineParent; //holds the lines
 
@@ -56,7 +57,6 @@ public class SheetManager : MonoBehaviour
         sl.PlayThis();
 
         GameManager.instance.playerInTurn.AddToPoints(sl.points);
-
         GameManager.instance.StartNextTurn();
 
         clickBlocker.SetActive(true);
@@ -103,14 +103,18 @@ public class SheetManager : MonoBehaviour
      */
     void CreateSheet()
     {
+        bool hasUpperBonus = false; //does the sheet contain line for upperbonus. if not, the game has as many rounds as the sheet has lines. if yes rounds = sheet length -1. checked after the for loop
+
         TextAsset textAsset = Resources.Load<TextAsset>("YatzyLinesVer1");
         string[] lineArray = textAsset.text.Split('\n');
         sheetLines = new SingleLine[lineArray.Length];
-        for (int i = 0; i<lineArray.Length;i++) {
+        lineObjects = new GameObject[lineArray.Length];
+        for (int i = 0; i < lineArray.Length; i++) {
             string[] tempLine = lineArray[i].Split('-');        //splitting line from text asset to id name and score
             GameObject lineGo = Instantiate(linePrefab);        //creating new line
             lineGo.transform.SetParent(lineParent.transform);     //parenting it
             lineGo.name = tempLine[1];                          //change gameobject name
+            lineObjects[i] = lineGo;                            //store the lines as gameobjects
             SingleLine sl = lineGo.GetComponent<SingleLine>();  //temp reference to the SingleLine of the object
             sheetLines[i] = sl;                                 //adding lines script to this scripts array
             sl.id = System.Int32.Parse(tempLine[0]);            //setting line's id, line name and possible score
@@ -118,10 +122,36 @@ public class SheetManager : MonoBehaviour
             sl.lineType = tempLine[2];
             sl.pointsDefault = System.Int32.Parse(tempLine[3]);
             lineGo.GetComponent<Toggle>().group = lineParent.GetComponent<ToggleGroup>();   //set lines toggle group
-            if (sl.lineType == "upBonus") {
+
+            if (sl.lineType == "upBonus") { //line calculating the bonus for the lines 1-6 is not handled where other lines are calculated (because it does not rely on the dices, but scores from the upper section)
                 upperBonusLine = sl;
+                hasUpperBonus = true;
             }
 
+
+        }
+        //game has as many rounds as the sheet has lines, minus the upper bonus line
+        if (hasUpperBonus)
+        {
+            GameManager.instance.roundsPerGame = sheetLines.Length - 1; 
+        }
+        else {
+            GameManager.instance.roundsPerGame = sheetLines.Length;
         }
     }
+
+    /*
+     Resetting for new game
+     */
+
+    public void ResetSheet() {
+        upperPoints = 0;
+        //delete previous line objects before creating new ones
+        foreach (GameObject go in lineObjects) {
+            Destroy(go);
+        }
+        //create new sheet
+        CreateSheet();
+    }
+
 }
