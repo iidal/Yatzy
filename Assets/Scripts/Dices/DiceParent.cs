@@ -18,11 +18,9 @@ public class DiceParent : MonoBehaviour
     public Button ThrowButton;
 
     public bool dicesThrown = false;
-    public bool allDicesStopped = false;
 
 
     public Dictionary<int, int> results = new Dictionary<int, int>();
-    //List<int> results = new List<int>();
     public int newResults = 0; //new results from not locked dices
 
     int diceAmount = 5;
@@ -82,8 +80,6 @@ public class DiceParent : MonoBehaviour
 
         foreach (GameObject go in diceObjects) {
             //only throw if dice has not been locked
-                 
-
             if (go.GetComponent<DiceManager>().isLocked == false ) {
                 go.SetActive(true);
                
@@ -105,6 +101,7 @@ public class DiceParent : MonoBehaviour
                rbs[index].AddTorque(throwTorque, ForceMode.Impulse);
 
                 diceButtons[index].GetComponentInChildren<TextMeshProUGUI>().text = "";
+                go.GetComponent<DiceManager>().result = 0;
             }
 
 
@@ -112,6 +109,7 @@ public class DiceParent : MonoBehaviour
             index++;
         }
 
+        yield return new WaitForSeconds(1f);
         dicesThrown = true;
     
         foreach (DiceManager dm in diceGMs) {
@@ -144,7 +142,6 @@ public class DiceParent : MonoBehaviour
             GameManager.instance.GetNumbers(temp);
             results.Clear();
             newResults = 0;
-            //allDicesStopped = true;
             dicesThrown = false;
             foreach (Button b in diceButtons) {
                 b.interactable = true;
@@ -155,8 +152,10 @@ public class DiceParent : MonoBehaviour
 
     public void RoundEnded() {
         ThrowButton.interactable = false;
+        
     }
     public void StartNewRound() {
+        HideDices();
         ThrowButton.interactable = true;
         foreach (DiceManager dm in diceGMs) {
             if (dm.isLocked)

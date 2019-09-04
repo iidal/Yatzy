@@ -58,7 +58,6 @@ public class SheetManager : MonoBehaviour
 
         GameManager.instance.playerInTurn.AddToPoints(sl.points);
         GameManager.instance.StartNextTurn();
-
         clickBlocker.SetActive(true);
 
         if (sl.lineType.Contains("upper")) {

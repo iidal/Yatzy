@@ -40,29 +40,21 @@ public class DiceManager : MonoBehaviour
         if (rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0)
         {
 
-            //if (DiceParent.instance.allDicesStopped)
-            //{
-            //    diceButton.interactable = true;
-            //}
             if (!diceStopped && DiceParent.instance.dicesThrown == true)
             {
                 //if dices start landing with an edge on floor(not on side) check that atleast one rotation axis is zero
-                //Debug.Log("dicestopped");
                 diceStopped = true;
-                
+
                 GetResult();
 
 
             }
         }
-        else {
-            //diceStopped = false;
-            //diceButton.interactable = false;
-        }
+
 
 
     }
-    void GetResult() {
+     void GetResult() {
         foreach (DiceCollider dc in sides) {
             if (dc.sideOnFloor) {
                 string diceSide = dc.name;
@@ -87,22 +79,15 @@ public class DiceManager : MonoBehaviour
                         break;
                     default:
                         Debug.Log("something is wrong with the dice");
-                        //NudgeDice();
                         break;
                 }
                 break;
             }
         }
         textTemp.text = result.ToString();
-
-       // diceButton.interactable = true;
         DiceParent.instance.GetResults(result, id);
+       
     }
-
-    //private void NudgeDice() {
-    //    Vector3 nudge = new Vector3(1,0,0);
-    //    rb.AddForce(nudge, ForceMode.Impulse);
-    //}
 
     //When clicking on dice
     private void OnMouseDown()
