@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     public PlayerScript[] players = new PlayerScript[1];    //all players
     [HideInInspector]
     public PlayerScript playerInTurn;   //player who is playing now
-    [HideInInspector]
-    public int throwsUsedPerRound;  //easier access for this info here
+    //[HideInInspector]
+   // public int throwsUsedPerRound;  //easier access for this info here
     [HideInInspector]
     public int throwsPerRound = 3;
 
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public bool roundEnded;
 
     //UI
-    public TextMeshProUGUI throwsLeftText;
+   // public TextMeshProUGUI throwsLeftText;
 
     public GameObject GameDonePanel;
 
@@ -40,14 +40,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerInTurn = players[0];
-        throwsLeftText.text = "throws left: 3";
+       // throwsLeftText.text = "throws left: 3";
 
     }
 
 
     public void WhenThrowing(int throwsUsed) {
         int throwsLeft = throwsPerRound - throwsUsed;
-        throwsLeftText.text = "throws left: " +throwsLeft.ToString();
+        //throwsLeftText.text = "throws left: " +throwsLeft.ToString();
     }
 
 
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         }
 
         DiceParent.instance.StartNewRound();
-        throwsUsedPerRound = 0;
+       // throwsUsedPerRound = 0;
         roundEnded = false;
 
         //showing that 3 throws left after round has been played, will be changed to something else in the future

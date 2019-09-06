@@ -6,8 +6,8 @@ using TMPro;
 public class PlayerScript : MonoBehaviour
 {
     int points = 0;
-    int throwsPerRound;
-    int throwsUsed = 0;
+   // int throwsPerRound;
+    //int throwsUsed = 0;
 
     public List<string> linesPlayed = new List<string>();
 
@@ -29,25 +29,27 @@ public class PlayerScript : MonoBehaviour
     public void AddToPoints(int result) {
 
         points += result;
-        throwsUsed = 0;
+      //  throwsUsed = 0;
         playersPointsText.text = points.ToString();
     }
 
 
     public void MakeThrow() {
-        if (throwsUsed < throwsPerRound) {
-            DiceParent.instance.ThrowDices();
-            throwsUsed++;
-            GameManager.instance.WhenThrowing(throwsUsed);
-        }
-        if (throwsUsed >= throwsPerRound ) {
-            GameManager.instance.WaitingForNextTurn();
-        }
+
+        DiceParent.instance.ThrowDices();
+        //if (throwsUsed < throwsPerRound) {
+        //    DiceParent.instance.ThrowDices();
+        //    throwsUsed++;
+        //    GameManager.instance.WhenThrowing(throwsUsed);
+        //}
+        //if (throwsUsed >= throwsPerRound ) {
+        //    GameManager.instance.WaitingForNextTurn();
+        //}
     }
 
     public void OnGameStart() {
 
-        throwsPerRound = GameManager.instance.throwsPerRound;
+      //  throwsPerRound = GameManager.instance.throwsPerRound;
 
         points = 0;
 

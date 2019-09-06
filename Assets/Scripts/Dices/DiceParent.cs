@@ -16,6 +16,9 @@ public class DiceParent : MonoBehaviour
     public Transform[] throwPositions = new Transform[2];
 
     public Button ThrowButton;
+    public TextMeshProUGUI throwsLeftText;
+    int throwsPerRound;
+    int throwsUsed = 0;
 
     public bool dicesThrown = false;
 
@@ -36,6 +39,7 @@ public class DiceParent : MonoBehaviour
     private void Start()
     {
         CreateDices();
+        throwsPerRound = GameManager.instance.throwsPerRound;
     }
     void CreateDices()
     {
@@ -61,16 +65,47 @@ public class DiceParent : MonoBehaviour
 
     #region Throwing
     public void ThrowDices() {
-        StartCoroutine("Throw", 1);
+
+        if (throwsUsed < throwsPerRound)
+        {
+            //check if all dices are locked, if yes, cant throw
+            bool allLocked = true;
+            foreach (DiceManager dm in diceGMs)
+            {
+                if (!dm.isLocked)
+                {
+                    allLocked = false;
+                }
+            }
+            if (!allLocked)
+            {
+                StartCoroutine("Throw", 1);
+            }
+            else
+            {
+               // ThrowButton.interactable = true;
+                Debug.Log("cant throw");
+                GameNotificationManager.instance.ShowNotification("allDicesLockedCantThrow");
+            }
+        }
+        else {
+            Debug.Log("obsolete code, will not come here. hopefully");
+        }
+
+        
     }
     public IEnumerator Throw(int i) {
 
+        ThrowButton.interactable = false;
+        SheetManager.instance.clickBlocker.SetActive(true);
         //adjusting direction where to throw from throw pos
         int dir;
         if (i == 0)
             dir = -1;
         else
             dir = 1;
+
+
 
 
         int index = 0;
@@ -109,13 +144,19 @@ public class DiceParent : MonoBehaviour
             index++;
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.25f);
         dicesThrown = true;
     
         foreach (DiceManager dm in diceGMs) {
             dm.diceStopped = false;
         }
         SheetManager.instance.ClearSheet();
+        throwsUsed++;
+        int throwsLeft = throwsPerRound - throwsUsed;
+        throwsLeftText.text = "throws left: " +throwsLeft.ToString();
+        if (throwsUsed == throwsPerRound) {
+            ThrowButton.interactable = false;
+        }
         
     }
     #endregion
@@ -156,6 +197,8 @@ public class DiceParent : MonoBehaviour
     }
     public void StartNewRound() {
         StartCoroutine("HideDices");
+        throwsUsed = 0;
+        throwsLeftText.text = "throws left: " + throwsPerRound.ToString();
         ThrowButton.interactable = true;
         foreach (DiceManager dm in diceGMs) {
             if (dm.isLocked)

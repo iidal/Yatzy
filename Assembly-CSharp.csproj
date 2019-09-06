@@ -62,10 +62,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\DelayTimer.cs" />
     <Compile Include="Assets\Scripts\Dices\DiceCollider.cs" />
     <Compile Include="Assets\Scripts\Dices\DiceManager.cs" />
     <Compile Include="Assets\Scripts\Dices\DiceParent.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GameNotificationManager.cs" />
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
     <Compile Include="Assets\Scripts\Sheet\LineCalculator.cs" />
     <Compile Include="Assets\Scripts\Sheet\SheetManager.cs" />
