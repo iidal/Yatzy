@@ -43,7 +43,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.4}
+  m_Size: {x: 0.6, y: 0.6, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8401948930520892929
 MonoBehaviour:
@@ -101,7 +101,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.4}
+  m_Size: {x: 0.6, y: 0.6, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &652816979211581232
 MonoBehaviour:
@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a37ad0383aa9af4db416ce5f04ac792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   result: 0
   isLocked: 0
   diceStopped: 0
@@ -169,6 +170,7 @@ MonoBehaviour:
   - {fileID: 8559269161536430210}
   diceMat: {fileID: 2100000, guid: 1fe6bf0c2a20668498df8e9abd7b1fe4, type: 2}
   lockedMat: {fileID: 2100000, guid: 362027264c8934e47b69c8b4fcc85f6e, type: 2}
+  diceButton: {fileID: 0}
 --- !u!1 &6527188357998068877
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +214,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.4}
+  m_Size: {x: 0.6, y: 0.6, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8995912165290073593
 MonoBehaviour:
@@ -270,7 +272,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.4}
+  m_Size: {x: 0.6, y: 0.6, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8559269161536430210
 MonoBehaviour:
@@ -328,7 +330,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.4}
+  m_Size: {x: 0.6, y: 0.6, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8590867984146667652
 MonoBehaviour:
@@ -386,7 +388,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.4}
+  m_Size: {x: 0.6, y: 0.6, z: 0.6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5667997859900074622
 MonoBehaviour:

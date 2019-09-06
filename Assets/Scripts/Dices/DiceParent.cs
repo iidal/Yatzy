@@ -155,7 +155,7 @@ public class DiceParent : MonoBehaviour
         
     }
     public void StartNewRound() {
-        HideDices();
+        StartCoroutine("HideDices");
         ThrowButton.interactable = true;
         foreach (DiceManager dm in diceGMs) {
             if (dm.isLocked)
@@ -168,16 +168,29 @@ public class DiceParent : MonoBehaviour
             db.GetComponentInChildren<TextMeshProUGUI>().text = "";
         }
     }
-    void HideDices() {
-        foreach (GameObject dice in diceObjects) {
+    IEnumerator HideDices() {
+
+
+        foreach (GameObject dice in diceObjects)
+        {
+
+            dice.transform.position = new Vector3(dice.transform.position.x, dice.transform.position.y +0.5f, dice.transform.position.z);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        foreach (GameObject dice in diceObjects)
+        {
             dice.SetActive(false); //this could be done with and animation in the future (shrinking maybe)
         }
+
+        yield return null;
     }
 
     public void OnNewGameStart() {
 
         
         StartNewRound();
-        HideDices();
+       // HideDices();
     }
 }
