@@ -16,13 +16,13 @@ public class DiceManager : MonoBehaviour
     public bool isLocked = false; //is the dice locked from throwing
     public bool diceStopped = false;
 
-    public DiceCollider[] sides = new DiceCollider[6];
+    public DiceCollider[] sides = new DiceCollider[6];  // DiceCollider checks if the side is touching floor
 
-    public Material diceMat;
-    public Material lockedMat;
+    public Material diceMat;    // normal material for dice
+    public Material lockedMat;  //material when dice is locked (copy of the normal material but with a different color)
 
-    public Button diceButton;
-    TextMeshProUGUI textTemp;
+    public Button diceButton;   //button from where the dice can be locked as well
+    TextMeshProUGUI textTemp;   // shows the result, might be changed to a sprite that looks like the dices material
 
     void Start()
     {
@@ -38,16 +38,17 @@ public class DiceManager : MonoBehaviour
     {
 
         if (rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0)
-        {
+        {//when dice has stopped the result can be checked
 
             if (!diceStopped && DiceParent.instance.dicesThrown == true)
             {
-                //if dices start landing with an edge on floor(not on side) check that atleast one rotation axis is zero
+                //dicestopped and dicesthrown makes sure GetResult is not called multiple times
+                
                 diceStopped = true;
 
                 GetResult();
 
-
+            //if dices start landing with an edge on floor(not on side) check that atleast one rotation axis is zero
             }
         }
 
@@ -55,6 +56,8 @@ public class DiceManager : MonoBehaviour
 
     }
      void GetResult() {
+        //get result from the dicecollider, only one has (should have) sideonfloor == true
+        //sideonfloors opposite side is the result
         foreach (DiceCollider dc in sides) {
             if (dc.sideOnFloor) {
                 string diceSide = dc.name;
@@ -84,8 +87,8 @@ public class DiceManager : MonoBehaviour
                 break;
             }
         }
-        textTemp.text = result.ToString();
-        DiceParent.instance.GetResults(result, id);
+        textTemp.text = result.ToString();  // show result on button
+        DiceParent.instance.GetResults(result, id); //send result forward
        
     }
 
@@ -97,7 +100,7 @@ public class DiceManager : MonoBehaviour
         }
     }
 
-    //Toggle dices lock state
+    //Toggle dice's lock state
     public void ToggleLocked() {
         if (isLocked)
             isLocked = false;
@@ -107,13 +110,14 @@ public class DiceManager : MonoBehaviour
 
         if (isLocked)
         {
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-            rend.material = lockedMat;
-            diceButton.GetComponent<Image>().color = Color.yellow;
+            rb.constraints = RigidbodyConstraints.FreezeAll;    //´cant be moved
+            rend.material = lockedMat;  //change material
+            diceButton.GetComponent<Image>().color = Color.yellow;  //change buttons color 
 
         }
         else
         {
+            //reset
             rb.constraints = RigidbodyConstraints.None;
             rend.material = diceMat;
             diceButton.GetComponent<Image>().color = Color.white;

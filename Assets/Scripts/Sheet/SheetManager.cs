@@ -5,31 +5,33 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 
+/// <summary>
+/// Managing things about showing points and playing lines
+/// </summary>
+
 public class SheetManager : MonoBehaviour
 {
-
     public static SheetManager instance;
-    public Button playButton;
 
+    public Button playButton; //play a line 
 
-    public int[] currentDices = new int [5];
+    public int[] currentDices = new int [5];    //current dice row
 
-    public SingleLine[] sheetLines;
-    public GameObject[] lineObjects;
-    public GameObject linePrefab;
+    public SingleLine[] sheetLines; //scripts for the lines
+    public GameObject[] lineObjects;    //lines as gameobjects
+    public GameObject linePrefab;   //line gameobject to be instantiated
     public GameObject lineParent; //holds the lines
+    public ToggleGroup lineToggleGroup; // access to all lines toggles
 
-    public ToggleGroup lineToggleGroup;
-
-    public GameObject clickBlocker;
+    public GameObject clickBlocker; //block clicks on the sheet when throwing etc
 
     int upperPoints = 0;
-    SingleLine upperBonusLine;
+    public SingleLine upperBonusLine;  //reference to the upper lines bonus (if the sheet has one) 
 
     //if needed
-    Dictionary<int, string> lineNames = new Dictionary<int, string>();
-    Dictionary<int, int> lineScores = new Dictionary<int, int>();
-    Dictionary<int, bool> playedLines = new Dictionary<int, bool>();
+    //Dictionary<int, string> lineNames = new Dictionary<int, string>();
+    //Dictionary<int, int> lineScores = new Dictionary<int, int>();
+    //Dictionary<int, bool> playedLines = new Dictionary<int, bool>();
 
 
     /////////////
@@ -49,37 +51,47 @@ public class SheetManager : MonoBehaviour
     }
 
 
+    //line has been chosen, play it
+    public void PlayRound() {  
 
-    public void PlayRound() {
-
+        //get the chosen line and do needed things in it
         Toggle chosenToggle = lineToggleGroup.ActiveToggles().FirstOrDefault();
         SingleLine sl = chosenToggle.GetComponent<SingleLine>();
         sl.PlayThis();
 
-        GameManager.instance.playerInTurn.AddToPoints(sl.points);
-        GameManager.instance.StartNextTurn();
         clickBlocker.SetActive(true);
 
+        GameManager.instance.playerInTurn.AddToPoints(sl.points); //send points to the players score
+        
+        //check the upper section if needed
         if (sl.lineType.Contains("upper")) {
-            upperPoints += sl.points;
-            if (upperPoints >= 63) {
-                Debug.Log("63");
-                upperBonusLine.SetOtherPoints(true);
-                upperBonusLine.PlayThis();
-            }
+            CheckUpperLine(sl);
         }
 
+       
+        GameManager.instance.StartNextTurn();       //new round
     }
 
 
     public void CalculateLines(int[] line) {
 
         currentDices = line;
-        LineCalculator.StartCalculating(sheetLines, currentDices);
+        LineCalculator.StartCalculating(sheetLines, currentDices);  // send the used sheet and the numbers to be calculated. the results are passed on to SingleLines of the sheetlines
 
         clickBlocker.SetActive(false);          //lines can be clicked
         if (!GameManager.instance.roundEnded) { //let player throw again once the dices have stopped moving, except when all throws have been used(round ended p much)
             DiceParent.instance.ThrowButton.interactable = true;
+        }
+    }
+    
+    //check the points in upper section and if bonus can be given
+    void CheckUpperLine(SingleLine line) {
+        upperPoints += line.points;
+        if (upperPoints >= 63 && upperBonusLine.hasBeenPlayed ==false) //so that the bonus points are not given mopre than once
+        {
+            upperBonusLine.SetOtherPoints(true);
+            upperBonusLine.PlayThis();
+            GameManager.instance.playerInTurn.AddToPoints(upperBonusLine.points);
         }
     }
     //If a line is selected play button can be pressed
@@ -143,6 +155,7 @@ public class SheetManager : MonoBehaviour
      Resetting for new game
      */
 
+        //delete and create new sheet
     public void ResetSheet() {
         upperPoints = 0;
         //delete previous line objects before creating new ones

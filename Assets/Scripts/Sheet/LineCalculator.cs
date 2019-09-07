@@ -218,7 +218,7 @@ public class LineCalculator
             sl.SetOtherPoints(false);
             return;
         }
-        //if enought different values, proceed
+        //if enough different values, proceed
 
         int count = 1; //how many values are in row (cant be zero there is always the first dice)
         for (int i = 1; i<numsList.Count;i++) {
@@ -231,6 +231,7 @@ public class LineCalculator
                 count = 1;
             }
         }
+        //if enough numbers in row, give points
         if (count >= numsInRow) {
             sl.SetOtherPoints(true);
         }

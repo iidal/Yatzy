@@ -4,29 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Handles the dices, throwing, etc
+/// </summary>
+
 public class DiceParent : MonoBehaviour
 {
     public static DiceParent instance; 
-    public GameObject[] diceObjects;
+    public GameObject[] diceObjects;    //dices as game object
     public GameObject dicePrefab;
-
     Rigidbody[] rbs;
-    DiceManager[] diceGMs;
+    DiceManager[] diceGMs;  //individual dice managers, same order as in all of the arrays with components for the dices
     public Button[] diceButtons;
-    public Transform[] throwPositions = new Transform[2];
+    public Transform[] throwPositions = new Transform[2];   // positions on each side where the dices are thrown from (one for each player)
 
     public Button ThrowButton;
-    public TextMeshProUGUI throwsLeftText;
-    int throwsPerRound;
+    public TextMeshProUGUI throwsLeftText;  //temporary maybe, shows how many throws left
+    int throwsPerRound; //is gotten from game manager
     int throwsUsed = 0;
 
-    public bool dicesThrown = false;
+    int diceAmount = 5; // dices in game
 
+    public bool dicesThrown = false; //true when dices get thrown, checking the states of the dices
 
-    public Dictionary<int, int> results = new Dictionary<int, int>();
-    public int newResults = 0; //new results from not locked dices
+    public Dictionary<int, int> results = new Dictionary<int, int>();   //id of the dice, score
+    public int newResults = 0; //
 
-    int diceAmount = 5;
+    
 
     #region Game start
     private void Awake()
@@ -41,12 +45,15 @@ public class DiceParent : MonoBehaviour
         CreateDices();
         throwsPerRound = GameManager.instance.throwsPerRound;
     }
+    
     void CreateDices()
     {
+        //references
         diceObjects = new GameObject[diceAmount];
         rbs = new Rigidbody[diceAmount];
         diceGMs = new DiceManager[diceAmount];
 
+        //creation and setting up needed things
         for (int i = 0; i < diceAmount; i++)
         {
             GameObject go = Instantiate(dicePrefab, transform.position, Quaternion.identity);
@@ -55,8 +62,8 @@ public class DiceParent : MonoBehaviour
             diceGMs[i]= go.GetComponent<DiceManager>();
             diceGMs[i].id = i;
             diceGMs[i].diceButton = diceButtons[i];
-            go.transform.parent = transform;
-            go.SetActive(false);
+            go.transform.parent = transform; //parenting
+            go.SetActive(false);    //hiding the dice
         }
 
 
@@ -66,6 +73,7 @@ public class DiceParent : MonoBehaviour
     #region Throwing
     public void ThrowDices() {
 
+        //can throw if throws are left to use
         if (throwsUsed < throwsPerRound)
         {
             //check if all dices are locked, if yes, cant throw
@@ -79,16 +87,16 @@ public class DiceParent : MonoBehaviour
             }
             if (!allLocked)
             {
-                StartCoroutine("Throw", 1);
+                //throw
+                StartCoroutine("Throw", 1); //parameter 0 or 1, which side to throw from (player 1 or 2)
             }
             else
             {
-               // ThrowButton.interactable = true;
-                Debug.Log("cant throw");
+                //tell player they cant throw when all dices are locked
                 GameNotificationManager.instance.ShowNotification("allDicesLockedCantThrow");
             }
         }
-        else {
+        else {//still keeping just in case for bugs
             Debug.Log("obsolete code, will not come here. hopefully");
         }
 
@@ -97,8 +105,9 @@ public class DiceParent : MonoBehaviour
     public IEnumerator Throw(int i) {
 
         ThrowButton.interactable = false;
-        SheetManager.instance.clickBlocker.SetActive(true);
-        //adjusting direction where to throw from throw pos
+        SheetManager.instance.clickBlocker.SetActive(true); //sheet cant be touched when dices are moving
+
+        //adjusting direction where to throw from throw pos. minus flips the direction so throws go to the bowl
         int dir;
         if (i == 0)
             dir = -1;
@@ -106,56 +115,58 @@ public class DiceParent : MonoBehaviour
             dir = 1;
 
 
-
-
-        int index = 0;
+        int index = 0; //index for looping through all the needed arrays referencing to dice components
+        //variables for adjusting throw
         Vector3 throwForce;
         Vector3 throwTorque;
         Vector3 throwPos;
 
         foreach (GameObject go in diceObjects) {
-            //only throw if dice has not been locked
+
+            //ACTUALLY THROWING INSIDE THIS IF
+            //only throw the dice if it has not been locked
             if (go.GetComponent<DiceManager>().isLocked == false ) {
                 go.SetActive(true);
                
+                //where to throw from and moving dice to that position
                 throwPos = throwPositions[i].transform.position;
                 throwPos.z += (index*1.2f);
                 go.transform.position = throwPos;
                 
-                
+                //add forces
                 rbs[index].angularVelocity = Vector3.zero;
                 rbs[index].velocity = Vector3.zero;
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForEndOfFrame(); //just in case, remains from fixing buggy dice behaviour 
                 go.transform.rotation = throwPositions[i].rotation;
                 throwForce = new Vector3(Random.Range(15,30)*dir,0,0);
-
                 throwTorque = new Vector3(Random.Range(-360, 360), Random.Range(-360,360), Random.Range(-360,360));
-
-                
                 rbs[index].AddForce(throwForce, ForceMode.Impulse);
-               rbs[index].AddTorque(throwTorque, ForceMode.Impulse);
+                rbs[index].AddTorque(throwTorque, ForceMode.Impulse);
 
-                diceButtons[index].GetComponentInChildren<TextMeshProUGUI>().text = "";
-                go.GetComponent<DiceManager>().result = 0;
+                diceButtons[index].GetComponentInChildren<TextMeshProUGUI>().text = ""; //reset the dice's button
+                diceGMs[index].result = 0;  //reset the dice's score
             }
 
 
-            diceButtons[index].interactable = false; //cant be clicked when moving 
+            diceButtons[index].interactable = false; //buttons cant be clicked when moving 
             index++;
         }
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.25f); // little wait so the dices dont get checked for a score too soon (when dices stop they are checked for a score, this way they are not checked when they are about to be thrown)
         dicesThrown = true;
     
         foreach (DiceManager dm in diceGMs) {
             dm.diceStopped = false;
         }
-        SheetManager.instance.ClearSheet();
+
+        SheetManager.instance.ClearSheet(); //clear last rounds calculations
+
         throwsUsed++;
         int throwsLeft = throwsPerRound - throwsUsed;
         throwsLeftText.text = "throws left: " +throwsLeft.ToString();
-        if (throwsUsed == throwsPerRound) {
-            ThrowButton.interactable = false;
+        if (throwsUsed == throwsPerRound) {         //if all throws used, round is ending
+            RoundEnded();  
+            GameManager.instance.roundEnded = true;
         }
         
     }
@@ -163,52 +174,55 @@ public class DiceParent : MonoBehaviour
 
     //results from dices, not the played points
     public void GetResults(int result, int id) {
-        newResults++;
-    
+
+        //getting the new results, sending them along when results have been gotten from each dice (id might be useless at this point, as well as counting new values, but better safe than sorry) 
+
         if (results.TryGetValue(id, out int value))
         {
             results[id] = result;
         }
         else
         {
+            newResults++;
             results.Add(id, result);
         }
 
 
-        if (newResults == 5) {
+        if (newResults == 5) {  //when results have been gotten from all dices
             List<int> temp = new List<int>();
             foreach (KeyValuePair<int,int> kvp in results) {
                 temp.Add(kvp.Value);
             }
-            GameManager.instance.GetNumbers(temp);
+            GameManager.instance.GetNumbers(temp);  //send results as list forward
             results.Clear();
             newResults = 0;
             dicesThrown = false;
             foreach (Button b in diceButtons) {
-                b.interactable = true;
+                b.interactable = true;  //dices can be locked/chosen
             }
         }
         
     }
 
-    public void RoundEnded() {
+    public void RoundEnded() {  //ie all throws have been used
         ThrowButton.interactable = false;
         
     }
     public void StartNewRound() {
-        StartCoroutine("HideDices");
+        StartCoroutine("HideDices"); // after round has been played dices are hidden (set active when throwing)
         throwsUsed = 0;
         throwsLeftText.text = "throws left: " + throwsPerRound.ToString();
-        ThrowButton.interactable = true;
+        ThrowButton.interactable = true; // can throw again
         foreach (DiceManager dm in diceGMs) {
-            if (dm.isLocked)
+            if (dm.isLocked)    // unlock locked dices 
             {
                 dm.ToggleLocked();
-            }
+            }   
             
         }
         foreach (Button db in diceButtons) {
             db.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            db.interactable = false;    //set interactable after throwing and dices have stopped
         }
     }
     IEnumerator HideDices() {
@@ -216,7 +230,7 @@ public class DiceParent : MonoBehaviour
 
         foreach (GameObject dice in diceObjects)
         {
-
+            //dices are lifted up from the floor so the colliders checking which side is touching the floor gets resetted. if the colliders are not resetted the dice will start to show wrong results
             dice.transform.position = new Vector3(dice.transform.position.x, dice.transform.position.y +0.5f, dice.transform.position.z);
         }
 
@@ -226,14 +240,11 @@ public class DiceParent : MonoBehaviour
         {
             dice.SetActive(false); //this could be done with and animation in the future (shrinking maybe)
         }
-
-        yield return null;
     }
 
-    public void OnNewGameStart() {
+    public void OnNewGameStart() {  //what needs to be done when a new game is starting
 
         
         StartNewRound();
-       // HideDices();
     }
 }

@@ -11,10 +11,10 @@ public class GameNotificationManager : MonoBehaviour
 
     public static GameNotificationManager instance;
 
-    string notificationName;
+    string notificationName;    //what popup needs to be shown
 
-
-    public GameObject allDicesLockedCantThrow;
+    //all the popups that are accessed through here
+    public GameObject allDicesLockedCantThrow; //if player has locked all the dices and tries to throw when there's still throws left to use
 
     
 
@@ -26,13 +26,15 @@ public class GameNotificationManager : MonoBehaviour
             instance = this;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        allDicesLockedCantThrow.SetActive(false);
+        //making sure all the popups are inactive at the start of the game (if they need to be). 
+        allDicesLockedCantThrow.SetActive(false);   
     }
 
+    //this is called with the needed name of the popup that is needed
     public void ShowNotification(string name) {
+
         notificationName = name;
         switch (notificationName) {
             case "allDicesLockedCantThrow":

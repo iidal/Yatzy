@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Genereal stuff about the game handled here
+/// </summary>
+
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-  
-    public int[] numbers = new int[5];  //numbers on dices
+    public int[] numbers = new int[5];  //numbers on dices stored here
 
-    public PlayerScript[] players = new PlayerScript[1];    //all players
+    public PlayerScript[] players = new PlayerScript[1];    //all players (later should be instantiated from here)
     [HideInInspector]
     public PlayerScript playerInTurn;   //player who is playing now
-    //[HideInInspector]
-   // public int throwsUsedPerRound;  //easier access for this info here
-    [HideInInspector]
+
     public int throwsPerRound = 3;
 
-    public int roundsPerGame = 0;
-    int currentRound = 1;
+    public int roundsPerGame = 0;   //changed to the length of the line sheet that is used for the game
+    int currentRound = 1;   
 
-    public bool roundEnded;
+    public bool roundEnded;     //true after a line has been played
 
-    //UI
-   // public TextMeshProUGUI throwsLeftText;
-
-    public GameObject GameDonePanel;
+    public GameObject GameDonePanel; // when game is finished show this, a new game can be started
 
     private void Awake()
     {
@@ -39,31 +38,21 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        //while players are not instantiated from here and there is only one player, the player is accessed like this
         playerInTurn = players[0];
-       // throwsLeftText.text = "throws left: 3";
 
     }
 
-
-    public void WhenThrowing(int throwsUsed) {
-        int throwsLeft = throwsPerRound - throwsUsed;
-        //throwsLeftText.text = "throws left: " +throwsLeft.ToString();
-    }
-
-
+    //storing current dice row here and passing them along to the sheet manager for checking lines etc
     public void GetNumbers(List<int> results) {
-        
-
         for (int i = 0; i<results.Count; i++) {
             numbers[i] = results[i];
         }
+        //sending the numbers for checking
         SheetManager.instance.CalculateLines(numbers);
     }
 
-    public void WaitingForNextTurn() {
-        DiceParent.instance.RoundEnded();
-        roundEnded = true;
-    }
+    //A line has been played, starting a new round
     public void StartNextTurn() {
         currentRound++;
         //check if we have played all the rounds of the game, if yes, end game, if no, continue normally
@@ -72,25 +61,22 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        DiceParent.instance.StartNewRound();
-       // throwsUsedPerRound = 0;
-        roundEnded = false;
+        DiceParent.instance.StartNewRound();     //set everything up for a new round with dices
 
-        //showing that 3 throws left after round has been played, will be changed to something else in the future
-        WhenThrowing(0);
+        roundEnded = false;
     }
 
     void EndGame() {
-        Debug.Log("game end");
+        //show the panel for a finished game
         GameDonePanel.SetActive(true);
     }
     public void NewGame() {
 
-        SheetManager.instance.ResetSheet();
-        DiceParent.instance.OnNewGameStart();
-        playerInTurn.OnGameStart();
-        currentRound = 1;
-        GameDonePanel.SetActive(false);
+        SheetManager.instance.ResetSheet(); //create a new sheet
+        DiceParent.instance.OnNewGameStart();   //reset dices for new game
+        playerInTurn.OnGameStart(); //resetting player (might be temporary)
+        currentRound = 1;   //reset rounds
+        GameDonePanel.SetActive(false); //hide game done panel
     }
 
 

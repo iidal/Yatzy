@@ -3839,7 +3839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e31564da75412bd4c92566c623b919e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerTime: 5
+  timerTime: 3
   startTimerOnEnable: 1
   onTimerEnd:
     m_PersistentCalls:
@@ -3886,7 +3886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1028a43e546304ebb689a83ab0affc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linesPlayed: []
   playersPointsText: {fileID: 154336191}
 --- !u!4 &1525082921
 Transform:
