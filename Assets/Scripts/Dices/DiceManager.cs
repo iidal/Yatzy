@@ -43,12 +43,12 @@ public class DiceManager : MonoBehaviour
             if (!diceStopped && DiceParent.instance.dicesThrown == true)
             {
                 //dicestopped and dicesthrown makes sure GetResult is not called multiple times
-                
+
                 diceStopped = true;
 
                 GetResult();
 
-            //if dices start landing with an edge on floor(not on side) check that atleast one rotation axis is zero
+                //if dices start landing with an edge on floor(not on side) check that atleast one rotation axis is zero
             }
         }
 
@@ -95,6 +95,8 @@ public class DiceManager : MonoBehaviour
     //When clicking on dice
     private void OnMouseDown()
     {
+        Debug.Log("dice clicked");
+
         if (diceButton.interactable) {
             ToggleLocked();
         }

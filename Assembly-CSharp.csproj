@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\DelayTimer.cs" />
     <Compile Include="Assets\Scripts\Dices\DiceCollider.cs" />
     <Compile Include="Assets\Scripts\Dices\DiceManager.cs" />
     <Compile Include="Assets\Scripts\Dices\DiceParent.cs" />
@@ -72,6 +71,8 @@
     <Compile Include="Assets\Scripts\Sheet\LineCalculator.cs" />
     <Compile Include="Assets\Scripts\Sheet\SheetManager.cs" />
     <Compile Include="Assets\Scripts\Sheet\SingleLine.cs" />
+    <Compile Include="Assets\Scripts\Tools\DelayTimer.cs" />
+    <Compile Include="Assets\Scripts\Tools\EditorComment.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Resources\YatzyLinesVer1.txt" />

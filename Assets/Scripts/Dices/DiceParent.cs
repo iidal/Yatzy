@@ -231,7 +231,7 @@ public class DiceParent : MonoBehaviour
         foreach (GameObject dice in diceObjects)
         {
             //dices are lifted up from the floor so the colliders checking which side is touching the floor gets resetted. if the colliders are not resetted the dice will start to show wrong results
-            dice.transform.position = new Vector3(dice.transform.position.x, dice.transform.position.y +0.5f, dice.transform.position.z);
+            dice.transform.position = new Vector3(dice.transform.position.x, dice.transform.position.y +0.7f, dice.transform.position.z);
         }
 
         yield return new WaitForSeconds(0.1f);

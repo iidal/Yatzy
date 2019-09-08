@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8401948930520892929}
   m_Layer: 0
   m_Name: side2
-  m_TagString: Untagged
+  m_TagString: DiceSide
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 652816979211581232}
   m_Layer: 0
   m_Name: side5
-  m_TagString: Untagged
+  m_TagString: DiceSide
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +132,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &5405752678268066363
+--- !u!65 &3723000325424105542
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,6 +144,19 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.02, z: 0.02}
+  m_Center: {x: -0.000010161661, y: 0, z: 0}
+--- !u!65 &5405752678268066363
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6479527595120670550}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.021, y: 0.021, z: 0.021}
   m_Center: {x: -0.000010161661, y: 0, z: 0}
 --- !u!114 &8227778698561870177
 MonoBehaviour:
@@ -184,7 +197,7 @@ GameObject:
   - component: {fileID: 8995912165290073593}
   m_Layer: 0
   m_Name: side3
-  m_TagString: Untagged
+  m_TagString: DiceSide
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -242,7 +255,7 @@ GameObject:
   - component: {fileID: 8559269161536430210}
   m_Layer: 0
   m_Name: side6
-  m_TagString: Untagged
+  m_TagString: DiceSide
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,7 +313,7 @@ GameObject:
   - component: {fileID: 8590867984146667652}
   m_Layer: 0
   m_Name: side4
-  m_TagString: Untagged
+  m_TagString: DiceSide
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -358,7 +371,7 @@ GameObject:
   - component: {fileID: 5667997859900074622}
   m_Layer: 0
   m_Name: side1
-  m_TagString: Untagged
+  m_TagString: DiceSide
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
