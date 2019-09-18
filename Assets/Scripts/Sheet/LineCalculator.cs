@@ -14,6 +14,8 @@ public class LineCalculator
     
     static string type;
 
+    
+
     public static void StartCalculating(SingleLine[] lines, int[] results) {
         //Setting up the dice row for checking it
         results.CopyTo(nums, 0);
@@ -259,9 +261,11 @@ public class LineCalculator
         foreach (int i in nums) {
             if (i != digit) {
                 sl.SetOtherPoints(false);
+                SheetManager.instance.IsItYatzy(false);
                 return;
             }
         }
         sl.SetOtherPoints(true);
+        SheetManager.instance.IsItYatzy(true);
     }
 }

@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+//////handles one dice
+
 public class DiceManager : MonoBehaviour
 {
     Rigidbody rb;

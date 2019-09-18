@@ -28,6 +28,11 @@ public class SheetManager : MonoBehaviour
     int upperPoints = 0;
     public SingleLine upperBonusLine;  //reference to the upper lines bonus (if the sheet has one) 
 
+    //for determining what points should be given considering a possible yatzy
+    public bool currentLineIsYatzy = false;    //is the current line yatzy (not played yet)
+    public bool yatzyPlayed = false;       //has yatzy line been played?   (check if sheet has yatzy line)
+    public bool yatzyZeroPoints = false;    //if the yatzy line has been played with 0 or 50 points. if zero, the player will not be awarded an extra 50 points on other lines for five same dices
+    public int YatzyExtraPoints = 50;  //will be set again in CreateSheet() in case yatzy points are not 50p
     //if needed
     //Dictionary<int, string> lineNames = new Dictionary<int, string>();
     //Dictionary<int, int> lineScores = new Dictionary<int, int>();
@@ -67,8 +72,23 @@ public class SheetManager : MonoBehaviour
         if (sl.lineType.Contains("upper")) {
             CheckUpperLine(sl);
         }
-
-       
+        //if line is first yatzy
+        if(sl.lineType == "yatzy" && !yatzyPlayed){
+            
+            if(currentLineIsYatzy){ //if yatzy has been played as zero, later yatzys wont give extra 50 points
+                yatzyZeroPoints = false;
+            }
+            else{
+                yatzyZeroPoints = true;
+            }
+            yatzyPlayed = true;
+        }
+        //if line is not yatzy, but dices are the same number and yatzy has not been played as 0. so give EXTRA POINTS!
+        else if(yatzyPlayed && !yatzyZeroPoints && currentLineIsYatzy){
+            GameManager.instance.playerInTurn.AddToPoints(YatzyExtraPoints);
+            Debug.Log("EXTRA FIDDY");
+        }
+       ///////
         GameManager.instance.StartNextTurn();       //new round
     }
 
@@ -95,6 +115,13 @@ public class SheetManager : MonoBehaviour
         }
     }
     //If a line is selected play button can be pressed
+
+    public void IsItYatzy(bool isYatzy){    //for checkign if current line is 5 same digits
+        
+        currentLineIsYatzy = isYatzy;
+
+    }
+
     public void CheckPlayButton() {
         if (lineToggleGroup.AnyTogglesOn() == true)
             playButton.interactable = true;
@@ -107,6 +134,7 @@ public class SheetManager : MonoBehaviour
     //used when throwing 
     public void ClearSheet() {
         lineToggleGroup.SetAllTogglesOff();
+
     }
 
     /*
@@ -138,6 +166,10 @@ public class SheetManager : MonoBehaviour
                 upperBonusLine = sl;
                 hasUpperBonus = true;
             }
+            if(sl.lineType =="yatzy"){
+                YatzyExtraPoints = sl.pointsDefault;
+
+            }
 
 
         }
@@ -158,6 +190,9 @@ public class SheetManager : MonoBehaviour
         //delete and create new sheet
     public void ResetSheet() {
         upperPoints = 0;
+        yatzyPlayed = false;
+        yatzyZeroPoints = false;
+        currentLineIsYatzy = false;
         //delete previous line objects before creating new ones
         foreach (GameObject go in lineObjects) {
             Destroy(go);

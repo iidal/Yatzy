@@ -28,7 +28,7 @@ public class DiceParent : MonoBehaviour
     public bool dicesThrown = false; //true when dices get thrown, checking the states of the dices
 
     public Dictionary<int, int> results = new Dictionary<int, int>();   //id of the dice, score
-    public int newResults = 0; //
+    public int newResults = 0; //for checking if result has come in from all dices (might be a little obsolete)
 
     
 
