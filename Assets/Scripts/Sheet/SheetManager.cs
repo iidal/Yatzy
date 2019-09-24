@@ -51,7 +51,7 @@ public class SheetManager : MonoBehaviour
     private void Start()
     {
         playButton.interactable = false;
-        CreateSheet();    //get lines from a text file and set up both line dictionaries
+        CreateSheet();    //get lines from a text file and set up everything
         clickBlocker.SetActive(true);
     }
 
@@ -68,7 +68,7 @@ public class SheetManager : MonoBehaviour
 
         GameManager.instance.playerInTurn.AddToPoints(sl.points); //send points to the players score
         
-        //check the upper section if needed
+        //check the upper section if needed for the upper bonus
         if (sl.lineType.Contains("upper")) {
             CheckUpperLine(sl);
         }

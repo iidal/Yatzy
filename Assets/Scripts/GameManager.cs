@@ -40,7 +40,19 @@ public class GameManager : MonoBehaviour
     {
         //while players are not instantiated from here and there is only one player, the player is accessed like this
         playerInTurn = players[0];
+    
+    }
+    void Update(){
+        // if(Input.GetKeyUp(KeyCode.O)){
+        //     Debug.Log("saving");
+        //      SaveLoad.SaveSoloResults("test2", Random.Range(0,1000));
+        // }
+        if(Input.GetKeyUp(KeyCode.P)){
+            Debug.Log("loadinf");
+            SaveLoad.Load();
 
+
+        }
     }
 
     //storing current dice row here and passing them along to the sheet manager for checking lines etc
@@ -68,7 +80,8 @@ public class GameManager : MonoBehaviour
 
     void EndGame() {
         //show the panel for a finished game
-        GameDonePanel.SetActive(true);
+        GameDonePanel.SetActive(true);  //move this to notification manager
+        SaveLoad.SaveSoloResults("player", playerInTurn.points);
     }
     public void NewGame() {
 
