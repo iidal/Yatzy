@@ -15,8 +15,8 @@ public class GameNotificationManager : MonoBehaviour
 
     //all the popups that are accessed through here
     public GameObject allDicesLockedCantThrow; //if player has locked all the dices and tries to throw when there's still throws left to use
-
-    
+    public GameObject SaveSoloScorePanel;   //player gives name to be saved
+    public GameObject GameOverPanel;
 
     private void Awake()
     {
@@ -40,6 +40,12 @@ public class GameNotificationManager : MonoBehaviour
             case "allDicesLockedCantThrow":
                 allDicesLockedCantThrow.SetActive(true);
                 break;
+            case "SetPlayerNamePanel":
+                SaveSoloScorePanel.SetActive(true);
+                break;
+            case "GameOverPanel":
+                GameOverPanel.SetActive(true);
+                break; 
             default:
                 break;
         }

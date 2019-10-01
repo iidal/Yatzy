@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public bool roundEnded;     //true after a line has been played
 
     public GameObject GameDonePanel; // when game is finished show this, a new game can be started
+    
 
     private void Awake()
     {
@@ -42,18 +43,7 @@ public class GameManager : MonoBehaviour
         playerInTurn = players[0];
     
     }
-    void Update(){
-        // if(Input.GetKeyUp(KeyCode.O)){
-        //     Debug.Log("saving");
-        //      SaveLoad.SaveSoloResults("test2", Random.Range(0,1000));
-        // }
-        if(Input.GetKeyUp(KeyCode.P)){
-            Debug.Log("loadinf");
-            SaveLoad.Load();
-
-
-        }
-    }
+  
 
     //storing current dice row here and passing them along to the sheet manager for checking lines etc
     public void GetNumbers(List<int> results) {
@@ -80,8 +70,9 @@ public class GameManager : MonoBehaviour
 
     void EndGame() {
         //show the panel for a finished game
-        GameDonePanel.SetActive(true);  //move this to notification manager
-        SaveLoad.SaveSoloResults("player", playerInTurn.points);
+        //GameDonePanel.SetActive(true);  //move this to notification manager
+        //SaveLoad.SaveSoloResults("player", playerInTurn.points);
+        GameNotificationManager.instance.ShowNotification("SetPlayerNamePanel");
     }
     public void NewGame() {
 

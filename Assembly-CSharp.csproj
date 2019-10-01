@@ -60,6 +60,8 @@
      <Compile Include="Assets\Scripts\Dices\DiceParent.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Menus\GameNotificationManager.cs" />
+     <Compile Include="Assets\Scripts\Menus\InsertScoreAndName.cs" />
+     <Compile Include="Assets\Scripts\Menus\LetterRoller.cs" />
      <Compile Include="Assets\Scripts\Menus\MenuManager.cs" />
      <Compile Include="Assets\Scripts\Menus\ScoreMenuManager.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
@@ -77,6 +79,7 @@
      <None Include="Assets\Resources\YatzyLinesVer1.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <None Include="Assets\Resources\NameCharacters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
