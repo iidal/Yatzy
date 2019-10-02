@@ -6,7 +6,7 @@ using TMPro;
 
 public class ScoreMenuManager : MonoBehaviour
 {
-    public TextMeshProUGUI scoreBoardText;
+    
     string scoresText;
     List<SavedResult> resultList = new List<SavedResult>();
     public TextMeshProUGUI[] textBlocks;
@@ -50,19 +50,6 @@ public class ScoreMenuManager : MonoBehaviour
     }
     List <SavedResult> SortResults(List<SavedResult> res){
         List<SavedResult> temp = new List<SavedResult> ();
-
-        // foreach(SavedResult sr in res){
-        //     if(temp == null){   //adding the firts one
-        //         temp.Add(sr);
-        //     }
-        //     else
-        //     {
-        //         for(int i = 0; i<res.Count; i++){
-                   
-        //         }
-        //     }
-
-        // }
 
         return temp;
     }

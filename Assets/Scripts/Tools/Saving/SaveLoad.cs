@@ -16,7 +16,6 @@ public static class SaveLoad {
     	FileStream file = File.Create (Application.persistentDataPath + "/savedResultsSolo.gd");
     	bf.Serialize(file, SaveLoad.results);
     	file.Close();
-		Debug.Log("done");
 
 	}
 	public static List<SavedResult> Load() {
