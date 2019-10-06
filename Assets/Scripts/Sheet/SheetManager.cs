@@ -122,7 +122,7 @@ public class SheetManager : MonoBehaviour
 
     }
 
-    public void CheckPlayButton() {
+    public void CheckPlayButton() { //should the play button be interactable (is some line chosen)
         if (lineToggleGroup.AnyTogglesOn() == true)
             playButton.interactable = true;
         else
@@ -166,7 +166,7 @@ public class SheetManager : MonoBehaviour
                 upperBonusLine = sl;
                 hasUpperBonus = true;
             }
-            if(sl.lineType =="yatzy"){
+            if(sl.lineType =="yatzy"){  //if sheet has yatzy, it will have extra points for extra yatzys
                 YatzyExtraPoints = sl.pointsDefault;
 
             }

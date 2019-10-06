@@ -4,11 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+/*
+for showing top 10 scores
+ */
 public class ScoreMenuManager : MonoBehaviour
 {
     
-    string scoresText;
-    List<SavedResult> resultList = new List<SavedResult>();
+   // string scoresText;
+    List<SavedResult> resultList = new List<SavedResult>(); //loaded results go here
     public TextMeshProUGUI[] textBlocks;
 
     void Awake()
@@ -22,13 +26,11 @@ public class ScoreMenuManager : MonoBehaviour
         resultList = SaveLoad.Load();
         
 
-        
-
-        //resultList = SortResults(resultList);
+        //goes through the saved results (if there are any). sorts and puts them into a presentable form
 
         int i = 0;
         if(resultList!=null){
-            //resultList.Sort();
+        
             resultList.Sort((x, y) => y.result.CompareTo(x.result));
             int resultsCount = resultList.Count;
             Debug.Log(resultsCount);
@@ -47,10 +49,5 @@ public class ScoreMenuManager : MonoBehaviour
         else{
             Debug.Log("no scores");
         }
-    }
-    List <SavedResult> SortResults(List<SavedResult> res){
-        List<SavedResult> temp = new List<SavedResult> ();
-
-        return temp;
     }
 }

@@ -13,7 +13,7 @@ public class SingleLine : MonoBehaviour
     //info of the line, id, name, type, points
     public int id;  
     public string lineName;
-    public string lineType;
+    public string lineType; //upper section, a straight, pair....
     public int pointsDefault; //if zero, points are calculated from dices
     public int points;   //points that were played and added to score
 

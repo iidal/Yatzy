@@ -4,6 +4,11 @@ using UnityEngine;
 using System;
 
 [System.Serializable]
+/*
+for saving players result from solo game, icomparable so these can be sorted
+
+ */
+
 public class SavedResult: IComparable<SavedResult>
 {
     public string playerName;
