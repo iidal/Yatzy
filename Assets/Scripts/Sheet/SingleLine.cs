@@ -60,6 +60,12 @@ public class SingleLine : MonoBehaviour
             scoreText.text = "0";
         }
     }
+    //when a sheet is loaded from file, use this to set the points
+    public void SetPointsFromFile(int p){
+        points = p;
+        scoreText.text = points.ToString();
+        PlayThis();
+    }
     //this line has been chosen to be played this round
     public void PlayThis() {    
         scoreText.enabled = false;

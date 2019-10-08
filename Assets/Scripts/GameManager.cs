@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public int throwsPerRound = 3;
 
     public int roundsPerGame = 0;   //changed to the length of the line sheet that is used for the game
-    int currentRound = 1;   
+    public int currentRound = 1;   
 
     public bool roundEnded;     //true after a line has been played
 
@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
         //GameDonePanel.SetActive(true);  //move this to notification manager
         //SaveLoad.SaveSoloResults("player", playerInTurn.points);
         GameNotificationManager.instance.ShowNotification("SetPlayerNamePanel");
+        SaveLoad.DeleteFile("gameState");
     }
     public void NewGame() {
 

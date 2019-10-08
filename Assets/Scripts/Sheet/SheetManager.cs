@@ -37,7 +37,7 @@ public class SheetManager : MonoBehaviour
     //Dictionary<int, string> lineNames = new Dictionary<int, string>();
     //Dictionary<int, int> lineScores = new Dictionary<int, int>();
     //Dictionary<int, bool> playedLines = new Dictionary<int, bool>();
-
+    List <SavedSheetLine> savedLines = new List<SavedSheetLine>();  //saved lines go here
 
     /////////////
 
@@ -47,12 +47,25 @@ public class SheetManager : MonoBehaviour
             Destroy(this);
         else
             instance = this;
+
+        
     }
     private void Start()
     {
         playButton.interactable = false;
-        CreateSheet();    //get lines from a text file and set up everything
         clickBlocker.SetActive(true);
+
+        CreateSheet();    //get lines from a text file and set up everything
+        //check if there is a saved game state
+        savedLines = SaveLoad.LoadGameState();
+        if(savedLines == null){
+            //do nothing
+            Debug.Log("no saved game");
+        }
+        else{
+            Debug.Log("saved game found");
+            Invoke("LoadPlayedSheet", 1);
+        }
     }
 
 
@@ -70,7 +83,8 @@ public class SheetManager : MonoBehaviour
         
         //check the upper section if needed for the upper bonus
         if (sl.lineType.Contains("upper")) {
-            CheckUpperLine(sl);
+            CheckUpperLine();
+            upperPoints += sl.points;
         }
         //if line is first yatzy
         if(sl.lineType == "yatzy" && !yatzyPlayed){
@@ -105,8 +119,8 @@ public class SheetManager : MonoBehaviour
     }
     
     //check the points in upper section and if bonus can be given
-    void CheckUpperLine(SingleLine line) {
-        upperPoints += line.points;
+    void CheckUpperLine() {
+        //upperPoints += line.points;
         if (upperPoints >= 63 && upperBonusLine.hasBeenPlayed ==false) //so that the bonus points are not given mopre than once
         {
             upperBonusLine.SetOtherPoints(true);
@@ -181,6 +195,46 @@ public class SheetManager : MonoBehaviour
         else {
             GameManager.instance.roundsPerGame = sheetLines.Length;
         }
+
+        
+    }
+
+    public void SavePlayedSheet(){
+        savedLines = new List<SavedSheetLine>();
+        foreach(SingleLine sl in sheetLines){
+            SavedSheetLine lineToSave = new SavedSheetLine(){id = sl.id, lineName = sl.lineName, lineType = sl.lineType, pointsDefault = sl.pointsDefault, points = sl.points, hasBeenPlayed = sl.hasBeenPlayed};
+            Debug.Log(sl.lineName + " " + sl.points);
+            savedLines.Add(lineToSave);
+        }
+        SaveLoad.SaveGameState(savedLines);
+    }
+
+    void LoadPlayedSheet()
+    {
+        int playedRounds = 0;
+        int pointsFromFile = 0;
+        foreach (SavedSheetLine ssl in savedLines)
+        {
+            if (ssl.hasBeenPlayed)
+            {
+                playedRounds++;
+                foreach (SingleLine sl in sheetLines)
+                {
+                    if (ssl.lineType == sl.lineType)
+                    {
+                        sl.SetPointsFromFile(ssl.points);
+                        pointsFromFile += ssl.points;
+                        if(sl.lineType.Contains("upper")){
+                            upperPoints += ssl.points;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        GameManager.instance.playerInTurn.AddToPoints(pointsFromFile);
+        GameManager.instance.currentRound += playedRounds;
+        CheckUpperLine();
     }
 
     /*

@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Tools\EditorComment.cs" />
      <Compile Include="Assets\Scripts\Tools\LoadScene.cs" />
      <Compile Include="Assets\Scripts\Tools\Saving\SavedResult.cs" />
+     <Compile Include="Assets\Scripts\Tools\Saving\SavedSheetLine.cs" />
      <Compile Include="Assets\Scripts\Tools\Saving\SaveLoad.cs" />
      <None Include="Assets\Resources\YatzyHowToPlay.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />

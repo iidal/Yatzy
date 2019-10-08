@@ -24,6 +24,7 @@ public class LineCalculator
  
         // checking line
         foreach (SingleLine sl in lines) {
+            if(!sl.hasBeenPlayed){
             type = sl.lineType;
 
             //Checking and calculating lines 1-6 
@@ -68,6 +69,7 @@ public class LineCalculator
                         break;
                 }
             }
+        }
         }
     }
     //lines 1-6

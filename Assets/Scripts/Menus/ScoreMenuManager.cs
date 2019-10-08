@@ -23,7 +23,7 @@ public class ScoreMenuManager : MonoBehaviour
     void LoadScoreBoard(){
 
 
-        resultList = SaveLoad.Load();
+        resultList = SaveLoad.LoadSoloScores();
         
 
         //goes through the saved results (if there are any). sorts and puts them into a presentable form

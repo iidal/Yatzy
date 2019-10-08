@@ -11,10 +11,14 @@ public class MenuManager : MonoBehaviour
     
     void Awake()
     {
-        SaveLoad.Load();    //loading saved data first thing when the game starts
+        SaveLoad.LoadSoloScores();    //loading saved data first thing when the game starts
     }
 
 
+
+    public void ClearSavedData(string fileName){
+        SaveLoad.DeleteFile(fileName);
+    }
 
 
 }
