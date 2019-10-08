@@ -57,7 +57,7 @@ public class SheetManager : MonoBehaviour
 
         CreateSheet();    //get lines from a text file and set up everything
         //check if there is a saved game state
-        savedLines = SaveLoad.LoadGameState();
+        savedLines = SaveLoad.LoadGameStateSheet();
         if(savedLines == null){
             //do nothing
             Debug.Log("no saved game");
@@ -65,6 +65,7 @@ public class SheetManager : MonoBehaviour
         else{
             Debug.Log("saved game found");
             Invoke("LoadPlayedSheet", 1);
+            Invoke("LoadGameState", 1.1f);
         }
     }
 
@@ -203,10 +204,12 @@ public class SheetManager : MonoBehaviour
         savedLines = new List<SavedSheetLine>();
         foreach(SingleLine sl in sheetLines){
             SavedSheetLine lineToSave = new SavedSheetLine(){id = sl.id, lineName = sl.lineName, lineType = sl.lineType, pointsDefault = sl.pointsDefault, points = sl.points, hasBeenPlayed = sl.hasBeenPlayed};
-            Debug.Log(sl.lineName + " " + sl.points);
             savedLines.Add(lineToSave);
         }
-        SaveLoad.SaveGameState(savedLines);
+        //temporary positions and rotations for dices to be saved while first adding saving for throws used
+        Vector3 tempPos = new Vector3(0,0,0);
+        SerializableVector3[] tempPositions = {tempPos, tempPos, tempPos, tempPos, tempPos}; 
+        SaveLoad.SaveGameState(savedLines, DiceParent.instance.throwsUsed, tempPositions, tempPositions);
     }
 
     void LoadPlayedSheet()
@@ -235,6 +238,15 @@ public class SheetManager : MonoBehaviour
         GameManager.instance.playerInTurn.AddToPoints(pointsFromFile);
         GameManager.instance.currentRound += playedRounds;
         CheckUpperLine();
+
+    }
+
+    void LoadGameState(){
+        SavedStateOther tempState = SaveLoad.LoadGameStateOther();
+        if(tempState != null){
+            DiceParent.instance.throwsUsed = tempState.throwsUsed;
+            DiceParent.instance.SetThrowsLeftText();
+        }
     }
 
     /*

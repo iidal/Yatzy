@@ -21,7 +21,7 @@ public class DiceParent : MonoBehaviour
     public Button ThrowButton;
     public TextMeshProUGUI throwsLeftText;  //temporary maybe, shows how many throws left
     int throwsPerRound; //is gotten from game manager
-    int throwsUsed = 0;
+    public int throwsUsed = 0;
 
     int diceAmount = 5; // dices in game
 
@@ -162,14 +162,20 @@ public class DiceParent : MonoBehaviour
         SheetManager.instance.ClearSheet(); //clear last rounds calculations
 
         throwsUsed++;
-        int throwsLeft = throwsPerRound - throwsUsed;
-        throwsLeftText.text = "throws left: " +throwsLeft.ToString();
+        // int throwsLeft = throwsPerRound - throwsUsed;
+        // throwsLeftText.text = "throws left: " +throwsLeft.ToString();
+        SetThrowsLeftText();
         if (throwsUsed == throwsPerRound) {         //if all throws used, round is ending
             RoundEnded();  
             GameManager.instance.roundEnded = true;
         }
         
     }
+    public void SetThrowsLeftText(){
+        int throwsLeft = throwsPerRound - throwsUsed;
+        throwsLeftText.text = "throws left: " +throwsLeft.ToString();
+    }
+
     #endregion
 
     //results from dices, not the played points

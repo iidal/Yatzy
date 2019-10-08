@@ -11,10 +11,13 @@ for saving game data, such as scores
  */
 public static class SaveLoad
 {
-
+    
     public static List<SavedResult> results = new List<SavedResult>(); //scores for completed games
 
+    //saving game state
     public static List<SavedSheetLine> savedLines = new List<SavedSheetLine>();
+    public static SavedStateOther gameState; //throws used, position and rotation of dices
+    
 
     #region saving and loading saved solo scores
     public static void SaveSoloResults(string name, int score)
@@ -48,22 +51,30 @@ public static class SaveLoad
     #endregion
     #region saving and loading the state of not completed solo game
 
-    public static void SaveGameState(List<SavedSheetLine> lines)
+    public static void SaveGameState(List<SavedSheetLine> lines, int throws, SerializableVector3[] positions, SerializableVector3[] rotations)
     {
         savedLines.Clear();
         savedLines = lines;
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gameState.gd");
+        FileStream file = File.Create(Application.persistentDataPath + "/gameStateSheet.gd");
         bf.Serialize(file, SaveLoad.savedLines);
         file.Close();
 		Debug.Log("sheet saved");
-    }
-	public static List<SavedSheetLine> LoadGameState(){
 
-		if (File.Exists(Application.persistentDataPath + "/gameState.gd"))
+        SavedStateOther stateTemp = new SavedStateOther(){throwsUsed = throws, dicePositions = positions, diceRotations = rotations};
+        gameState = stateTemp;
+        bf = new BinaryFormatter();
+        file = File.Create(Application.persistentDataPath + "/gameStateOther.gd");
+        bf.Serialize(file, SaveLoad.gameState);
+        file.Close();
+		Debug.Log("state Saved");
+    }
+	public static List<SavedSheetLine> LoadGameStateSheet(){
+
+		if (File.Exists(Application.persistentDataPath + "/gameStateSheet.gd"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gameState.gd", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/gameStateSheet.gd", FileMode.Open);
             SaveLoad.savedLines = (List<SavedSheetLine>)bf.Deserialize(file);
             file.Close();
 			
@@ -73,15 +84,27 @@ public static class SaveLoad
         }
         return null;
 	}
+    public static SavedStateOther LoadGameStateOther(){
+        if (File.Exists(Application.persistentDataPath + "/gameStateOther.gd"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/gameStateOther.gd", FileMode.Open);
+            SaveLoad.gameState = (SavedStateOther)bf.Deserialize(file);
+            file.Close();
+			
+            return gameState;
+            
+           
+        }
+        return null;
+    }
 
     #endregion
-    public static void DeleteFile(string fileName)
+    public static void DeleteFile(string toDelete)
     {
-        try{
-        File.Delete(Application.persistentDataPath + "/"+fileName + ".gd");
-        }
-        catch{
-            Debug.Log("deleting a file failed");
+        if(toDelete=="gameState"){
+            File.Delete(Application.persistentDataPath + "/gameStateSheet.gd");
+            File.Delete(Application.persistentDataPath + "/gameStateOther.gd");
         }
     }
 }
