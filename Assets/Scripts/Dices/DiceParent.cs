@@ -260,10 +260,11 @@ public class DiceParent : MonoBehaviour
         int i =0;
         if (posOrRot == "position")
         {
-
+            
             foreach (GameObject go in diceObjects)
             {
-                tempArray[i] = go.transform.position;
+                Vector3 tempVec = new Vector3(go.transform.position.x, go.transform.position.y+1, go.transform.position.z);
+                tempArray[i] = tempVec;
                 i++;
             }
             return tempArray;
@@ -283,5 +284,20 @@ public class DiceParent : MonoBehaviour
             Debug.Log("whoops something went wrong with the posOrRot string");
             return null;
         }
+    }
+    public IEnumerator DicesLoaded(SerializableVector3[] loadedPos, SerializableVector3[] loadedRot){
+        Debug.Log("dice parent dices loaded");
+        int i = 0;
+        foreach(GameObject go in diceObjects){
+            go.SetActive(true);
+            go.transform.position = loadedPos[i];
+            Quaternion tempQ = Quaternion.Euler(loadedRot[i]);
+            go.transform.rotation = tempQ;
+            i++;
+        }
+        yield return new WaitForSeconds(0.2f);
+        dicesThrown = true;
+
+
     }
 }

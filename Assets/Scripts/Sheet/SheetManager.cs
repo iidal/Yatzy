@@ -33,10 +33,8 @@ public class SheetManager : MonoBehaviour
     public bool yatzyPlayed = false;       //has yatzy line been played?   (check if sheet has yatzy line)
     public bool yatzyZeroPoints = false;    //if the yatzy line has been played with 0 or 50 points. if zero, the player will not be awarded an extra 50 points on other lines for five same dices
     public int YatzyExtraPoints = 50;  //will be set again in CreateSheet() in case yatzy points are not 50p
-    //if needed
-    //Dictionary<int, string> lineNames = new Dictionary<int, string>();
-    //Dictionary<int, int> lineScores = new Dictionary<int, int>();
-    //Dictionary<int, bool> playedLines = new Dictionary<int, bool>();
+    
+    
     List <SavedSheetLine> savedLines = new List<SavedSheetLine>();  //saved lines go here
 
     /////////////

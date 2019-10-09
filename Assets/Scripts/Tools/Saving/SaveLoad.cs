@@ -51,7 +51,7 @@ public static class SaveLoad
     #endregion
     #region saving and loading the state of not completed solo game
 
-    public static void SaveGameState(List<SavedSheetLine> lines, int throws, SerializableVector3[] positions, SerializableVector3[] rotations)
+    public static void SaveGameState(List<SavedSheetLine> lines, int throws, bool collected, SerializableVector3[] positions, SerializableVector3[] rotations)
     {
         savedLines.Clear();
         savedLines = lines;
@@ -61,7 +61,7 @@ public static class SaveLoad
         file.Close();
 		Debug.Log("sheet saved");
 
-        SavedStateOther stateTemp = new SavedStateOther(){throwsUsed = throws, dicePositions = positions, diceRotations = rotations};
+        SavedStateOther stateTemp = new SavedStateOther(){throwsUsed = throws, dicesCollected = collected, dicePositions = positions, diceRotations = rotations};
         gameState = stateTemp;
         bf = new BinaryFormatter();
         file = File.Create(Application.persistentDataPath + "/gameStateOther.gd");

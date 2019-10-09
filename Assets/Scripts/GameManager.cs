@@ -85,25 +85,44 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame(){
         List<SavedSheetLine>tempLines = SheetManager.instance.SavePlayedSheet();
+        
+        int throwsTemp = DiceParent.instance.throwsUsed;
+
+        bool collectedTemp = false; //if this is true, positions and rotation dont need to be used
+        if(throwsTemp == 0) 
+            collectedTemp = true;
+        
+
         SerializableVector3[] tempPositions = DiceParent.instance.SaveDices("position");
         SerializableVector3[] tempRotations = DiceParent.instance.SaveDices("rotation");
-        SaveLoad.SaveGameState(tempLines, DiceParent.instance.throwsUsed, tempPositions, tempRotations);
+
+        SaveLoad.SaveGameState(tempLines, throwsTemp, collectedTemp, tempPositions, tempRotations);
     }
-    public void LoadGameState(){
+    public void LoadGameState()
+    {
         //loading the sheet is done in sheet manager no need to move it here atm
         //can switch between vector3 and the serializable one with the implicit operator thing
 
         SavedStateOther tempState = SaveLoad.LoadGameStateOther();
-        if(tempState == null){
+        if (tempState == null)
+        {
             return;
         }
         DiceParent.instance.throwsUsed = tempState.throwsUsed;
         DiceParent.instance.SetThrowsLeftText();
-        foreach(Vector3 sv3 in tempState.dicePositions){
-            Debug.Log(sv3.x + " " + sv3.y + " "+  sv3.z);
-        }
-        foreach(Vector3 sv3 in tempState.diceRotations){
-            Debug.Log(sv3.x + " " + sv3.y + " "+  sv3.z);
+
+        if (!tempState.dicesCollected){
+    
+            StartCoroutine(DiceParent.instance.DicesLoaded(tempState.dicePositions, tempState.diceRotations));
+            
+            // foreach (Vector3 sv3 in tempState.dicePositions)
+            // {
+            //     Debug.Log(sv3.x + " " + sv3.y + " " + sv3.z);
+            // }
+            // foreach (Vector3 sv3 in tempState.diceRotations)
+            // {
+            //     Debug.Log(sv3.x + " " + sv3.y + " " + sv3.z);
+            // }
         }
      
     

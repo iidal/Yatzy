@@ -28,7 +28,7 @@ public class DiceManager : MonoBehaviour
 
     void Start()
     {
-
+        Debug.Log("mitä vittua");
         rb = GetComponent<Rigidbody>();
         rend = GetComponent<Renderer>();
         textTemp = diceButton.GetComponentInChildren<TextMeshProUGUI>();
