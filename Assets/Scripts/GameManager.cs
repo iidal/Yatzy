@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         //while players are not instantiated from here and there is only one player, the player is accessed like this
         playerInTurn = players[0];
-    
+        Invoke("LoadGameState", 0.8f);
     }
   
 
@@ -70,8 +70,6 @@ public class GameManager : MonoBehaviour
 
     void EndGame() {
         //show the panel for a finished game
-        //GameDonePanel.SetActive(true);  //move this to notification manager
-        //SaveLoad.SaveSoloResults("player", playerInTurn.points);
         GameNotificationManager.instance.ShowNotification("SetPlayerNamePanel");
         SaveLoad.DeleteFile("gameState");
     }
@@ -85,4 +83,30 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void SaveGame(){
+        List<SavedSheetLine>tempLines = SheetManager.instance.SavePlayedSheet();
+        SerializableVector3[] tempPositions = DiceParent.instance.SaveDices("position");
+        SerializableVector3[] tempRotations = DiceParent.instance.SaveDices("rotation");
+        SaveLoad.SaveGameState(tempLines, DiceParent.instance.throwsUsed, tempPositions, tempRotations);
+    }
+    public void LoadGameState(){
+        //loading the sheet is done in sheet manager no need to move it here atm
+        //can switch between vector3 and the serializable one with the implicit operator thing
+
+        SavedStateOther tempState = SaveLoad.LoadGameStateOther();
+        if(tempState == null){
+            return;
+        }
+        DiceParent.instance.throwsUsed = tempState.throwsUsed;
+        DiceParent.instance.SetThrowsLeftText();
+        foreach(Vector3 sv3 in tempState.dicePositions){
+            Debug.Log(sv3.x + " " + sv3.y + " "+  sv3.z);
+        }
+        foreach(Vector3 sv3 in tempState.diceRotations){
+            Debug.Log(sv3.x + " " + sv3.y + " "+  sv3.z);
+        }
+     
+    
+
+    }
 }

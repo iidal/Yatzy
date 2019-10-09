@@ -253,4 +253,35 @@ public class DiceParent : MonoBehaviour
         
         StartNewRound();
     }
+
+    public SerializableVector3[] SaveDices(string posOrRot){
+
+        SerializableVector3[] tempArray = new SerializableVector3[diceObjects.Length];
+        int i =0;
+        if (posOrRot == "position")
+        {
+
+            foreach (GameObject go in diceObjects)
+            {
+                tempArray[i] = go.transform.position;
+                i++;
+            }
+            return tempArray;
+        }
+        else if (posOrRot == "rotation")
+        {
+
+            foreach (GameObject go in diceObjects)
+            {
+                tempArray[i] = go.transform.rotation.eulerAngles;
+                i++;
+            }
+            return tempArray;
+        }
+        else
+        {
+            Debug.Log("whoops something went wrong with the posOrRot string");
+            return null;
+        }
+    }
 }

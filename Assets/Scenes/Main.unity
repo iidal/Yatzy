@@ -1499,6 +1499,7 @@ MonoBehaviour:
   - {fileID: 1568280223}
   ThrowButton: {fileID: 1520364596}
   throwsLeftText: {fileID: 2026118347}
+  throwsUsed: 0
   dicesThrown: 0
   newResults: 0
 --- !u!4 &189987841
@@ -4845,8 +4846,8 @@ MonoBehaviour:
           m_StringArgument: Menus
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1795556549}
-        m_MethodName: SavePlayedSheet
+      - m_Target: {fileID: 2003396927}
+        m_MethodName: SaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
