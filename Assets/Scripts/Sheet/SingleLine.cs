@@ -16,7 +16,7 @@ public class SingleLine : MonoBehaviour
     public string lineType; //upper section, a straight, pair....
     public int pointsDefault; //if zero, points are calculated from dices
     public int points;   //points that were played and added to score
-
+    public int extraPoints; //ie multiyatzys. this variable is changed from elsewhere at the moment and is not checked in this script (checked in sheetmanager)
     Toggle toggle;  // reference to this lines toggle
 
     public bool hasBeenPlayed = false;  //has the line been played

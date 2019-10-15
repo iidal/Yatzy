@@ -11,6 +11,7 @@ public class SavedSheetLine
     public string lineType; //upper section, a straight, pair....
     public int pointsDefault; //if zero, points are calculated from dices
     public int points;   
+    public int extraPoints; // ie for multiyatzys
     public bool hasBeenPlayed;  //has the line been played
 
     public SavedSheetLine(){
@@ -19,6 +20,7 @@ public class SavedSheetLine
         lineType = "";
         pointsDefault = 0;
         points = 0;
+        extraPoints = 0;
         hasBeenPlayed = false;
 
     }

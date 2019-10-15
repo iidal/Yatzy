@@ -99,6 +99,7 @@ public class SheetManager : MonoBehaviour
         //if line is not yatzy, but dices are the same number and yatzy has not been played as 0. so give EXTRA POINTS!
         else if(yatzyPlayed && !yatzyZeroPoints && currentLineIsYatzy){
             GameManager.instance.playerInTurn.AddToPoints(YatzyExtraPoints);
+            sl.extraPoints = YatzyExtraPoints;
             Debug.Log("EXTRA FIDDY");
         }
        ///////
@@ -201,7 +202,7 @@ public class SheetManager : MonoBehaviour
     public List<SavedSheetLine> SavePlayedSheet(){
         savedLines = new List<SavedSheetLine>();
         foreach(SingleLine sl in sheetLines){
-            SavedSheetLine lineToSave = new SavedSheetLine(){id = sl.id, lineName = sl.lineName, lineType = sl.lineType, pointsDefault = sl.pointsDefault, points = sl.points, hasBeenPlayed = sl.hasBeenPlayed};
+            SavedSheetLine lineToSave = new SavedSheetLine(){id = sl.id, lineName = sl.lineName, lineType = sl.lineType, pointsDefault = sl.pointsDefault, points = sl.points, extraPoints = sl.extraPoints, hasBeenPlayed = sl.hasBeenPlayed};
             savedLines.Add(lineToSave);
         }
         return savedLines;
@@ -223,9 +224,11 @@ public class SheetManager : MonoBehaviour
                     {
                         sl.SetPointsFromFile(ssl.points);
                         pointsFromFile += ssl.points;
+                        pointsFromFile += ssl.extraPoints;
                         if(sl.lineType.Contains("upper")){
                             upperPoints += ssl.points;
                         }
+                        
                         break;
                     }
                 }

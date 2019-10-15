@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject GameDonePanel; // when game is finished show this, a new game can be started
     
+    public int[] testnums;
+
 
     private void Awake()
     {
@@ -50,6 +52,12 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i<results.Count; i++) {
             numbers[i] = results[i];
         }
+        // numbers[0] = testnums[0];
+        // numbers[1] = testnums[1];
+        // numbers[2] = testnums[2];
+        // numbers[3] = testnums[3];
+        // numbers[4] = testnums[4];
+
         //sending the numbers for checking
         SheetManager.instance.CalculateLines(numbers);
     }
@@ -87,7 +95,8 @@ public class GameManager : MonoBehaviour
         List<SavedSheetLine>tempLines = SheetManager.instance.SavePlayedSheet();
         
         int throwsTemp = DiceParent.instance.throwsUsed;
-
+        bool yatzyPlayedTemp = SheetManager.instance.yatzyPlayed;
+        bool yatzyPlayedZeroTemp = SheetManager.instance.yatzyZeroPoints;
         bool collectedTemp = false; //if this is true, positions and rotation dont need to be used
         if(throwsTemp == 0) 
             collectedTemp = true;
@@ -96,7 +105,7 @@ public class GameManager : MonoBehaviour
         SerializableVector3[] tempPositions = DiceParent.instance.SaveDices("position");
         SerializableVector3[] tempRotations = DiceParent.instance.SaveDices("rotation");
 
-        SaveLoad.SaveGameState(tempLines, throwsTemp, collectedTemp, tempPositions, tempRotations);
+        SaveLoad.SaveGameState(tempLines, throwsTemp, yatzyPlayedTemp, yatzyPlayedZeroTemp, collectedTemp, tempPositions, tempRotations);
     }
     public void LoadGameState()
     {
@@ -110,19 +119,13 @@ public class GameManager : MonoBehaviour
         }
         DiceParent.instance.throwsUsed = tempState.throwsUsed;
         DiceParent.instance.SetThrowsLeftText();
+        SheetManager.instance.yatzyZeroPoints = tempState.yatzyPlayedZero;
+        SheetManager.instance.yatzyPlayed = tempState.yatzyPlayed;
 
-        if (!tempState.dicesCollected){
+        if (!tempState.dicesCollected){//if the dices are collected, their positions and rotations dont need to be updated
     
             StartCoroutine(DiceParent.instance.DicesLoaded(tempState.dicePositions, tempState.diceRotations));
             
-            // foreach (Vector3 sv3 in tempState.dicePositions)
-            // {
-            //     Debug.Log(sv3.x + " " + sv3.y + " " + sv3.z);
-            // }
-            // foreach (Vector3 sv3 in tempState.diceRotations)
-            // {
-            //     Debug.Log(sv3.x + " " + sv3.y + " " + sv3.z);
-            // }
         }
      
     
