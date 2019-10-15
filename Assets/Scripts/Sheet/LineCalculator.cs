@@ -217,11 +217,14 @@ public class LineCalculator
         }
         numsList.Sort();
 
+
+
         //there has to be enough different values for a straight to be possible (longer the list more different numbers)
         if (numsList.Count < numsInRow) {
             sl.SetOtherPoints(false);
             return;
         }
+
         //if enough different values, proceed
 
         int count = 1; //how many values are in row (cant be zero there is always the first dice)
@@ -231,7 +234,7 @@ public class LineCalculator
             {
                 count++;
             }
-            else {//if not, start from one
+            else if(count < numsInRow){//if not, start from one
                 count = 1;
             }
         }
