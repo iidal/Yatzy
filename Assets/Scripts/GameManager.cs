@@ -52,11 +52,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i<results.Count; i++) {
             numbers[i] = results[i];
         }
-        // numbers[0] = testnums[0];
-        // numbers[1] = testnums[1];
-        // numbers[2] = testnums[2];
-        // numbers[3] = testnums[3];
-        // numbers[4] = testnums[4];
+
 
         //sending the numbers for checking
         SheetManager.instance.CalculateLines(numbers);
