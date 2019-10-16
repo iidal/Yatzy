@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Menus\GameNotificationManager.cs" />
      <Compile Include="Assets\Scripts\Menus\InsertScoreAndName.cs" />
+     <Compile Include="Assets\Scripts\Menus\InstructionsManager.cs" />
      <Compile Include="Assets\Scripts\Menus\LetterRoller.cs" />
      <Compile Include="Assets\Scripts\Menus\MenuManager.cs" />
      <Compile Include="Assets\Scripts\Menus\ScoreMenuManager.cs" />
