@@ -123,6 +123,11 @@ public class GameManager : MonoBehaviour
             StartCoroutine(DiceParent.instance.DicesLoaded(tempState.dicePositions, tempState.diceRotations));
             
         }
+        Debug.Log(tempState.throwsUsed);
+        Debug.Log(throwsPerRound);
+        if(tempState.throwsUsed == throwsPerRound){
+            DiceParent.instance.ThrowButton.interactable = false;
+        }
      
     
 

@@ -114,7 +114,7 @@ public class SheetManager : MonoBehaviour
         LineCalculator.StartCalculating(sheetLines, currentDices);  // send the used sheet and the numbers to be calculated. the results are passed on to SingleLines of the sheetlines
 
         clickBlocker.SetActive(false);          //lines can be clicked
-        if (!GameManager.instance.roundEnded) { //let player throw again once the dices have stopped moving, except when all throws have been used(round ended p much)
+        if (!GameManager.instance.roundEnded && DiceParent.instance.throwsUsed != GameManager.instance.throwsPerRound) { //let player throw again once the dices have stopped moving, except when all throws have been used(round ended p much)
             DiceParent.instance.ThrowButton.interactable = true;
         }
     }
