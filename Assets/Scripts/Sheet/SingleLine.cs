@@ -25,7 +25,8 @@ public class SingleLine : MonoBehaviour
     public TextMeshProUGUI labelText;   //line's name
     public TextMeshProUGUI scoreText;   //showing current score, the points the player gets if they play this line
     public TextMeshProUGUI chosenScoreText; //when the line is played this text is enabled with the played points and stays up
-    public TextMeshProUGUI extraPointsText;
+    public TextMeshProUGUI extraPointsText; // for multiple yatzy points
+    public TextMeshProUGUI upperBonusCheckingText;  // tracking upper section points and showing them to player
 
 
 
@@ -92,6 +93,11 @@ public class SingleLine : MonoBehaviour
         hasBeenPlayed = true;
     }
 
+    //this is only needed for upper bonus line
+    public void UpperBonusUpdating(int currentPoints){
+        upperBonusCheckingText.text = currentPoints.ToString() + "/63";
+    }
+
     public void ValueChange()
     { //lines toggle has been clicked
         SheetManager.instance.CheckPlayButton();    //check if any toggle is on, if not, play button cant be clicked
@@ -103,8 +109,11 @@ public class SingleLine : MonoBehaviour
         labelText = tempObjs[0];
         scoreText = tempObjs[1];
         chosenScoreText = tempObjs[2];
-        extraPointsText = tempObjs[3];
-
+        if(lineType == "upBonus"){
+            upperBonusCheckingText = tempObjs[3];
+        }else{
+            extraPointsText = tempObjs[3];
+        }
         labelText.text = lineName;
     }
 }

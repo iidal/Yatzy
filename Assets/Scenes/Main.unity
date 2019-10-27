@@ -4641,6 +4641,8 @@ MonoBehaviour:
   lineObjects: []
   linePrefab: {fileID: 2526729134412849223, guid: c66e81d155586824384d7ec568899ddb,
     type: 3}
+  upperBonusLinePrefab: {fileID: 2526729134412849223, guid: ee6a42fae5557c54eb290d414615b1f3,
+    type: 3}
   lineParent: {fileID: 836615138}
   lineToggleGroup: {fileID: 836615141}
   clickBlocker: {fileID: 677313252}
