@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DiceAudioManager.cs" />
      <Compile Include="Assets\Scripts\Dices\DiceCollider.cs" />
      <Compile Include="Assets\Scripts\Dices\DiceManager.cs" />
      <Compile Include="Assets\Scripts\Dices\DiceParent.cs" />
@@ -66,10 +67,10 @@
      <Compile Include="Assets\Scripts\Menus\MenuManager.cs" />
      <Compile Include="Assets\Scripts\Menus\ScoreMenuManager.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
-     <Compile Include="Assets\Scripts\ScreenTransitionManager.cs" />
      <Compile Include="Assets\Scripts\Sheet\LineCalculator.cs" />
      <Compile Include="Assets\Scripts\Sheet\SheetManager.cs" />
      <Compile Include="Assets\Scripts\Sheet\SingleLine.cs" />
+     <Compile Include="Assets\Scripts\SoundOnImpact.cs" />
      <Compile Include="Assets\Scripts\Tools\DelayTimer.cs" />
      <Compile Include="Assets\Scripts\Tools\EditorComment.cs" />
      <Compile Include="Assets\Scripts\Tools\LoadScene.cs" />
@@ -78,6 +79,7 @@
      <Compile Include="Assets\Scripts\Tools\Saving\SavedStateOther.cs" />
      <Compile Include="Assets\Scripts\Tools\Saving\SaveLoad.cs" />
      <Compile Include="Assets\Scripts\Tools\Saving\SerializableVector3.cs" />
+     <Compile Include="Assets\Scripts\Tools\ScreenTransitionManager.cs" />
      <None Include="Assets\Resources\YatzyHowToPlay.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
