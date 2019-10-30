@@ -20,7 +20,6 @@ public class SoundOnImpact : MonoBehaviour
         if (other.gameObject.tag == "Floor")
         {
             Vector3 diceVelocity = rb.velocity;
-            Debug.Log(diceVelocity);
             float vol = 0;
             if(diceVelocity.x >10 || diceVelocity.y >10 || diceVelocity.z >10){
                 vol = Random.Range(0.4f,0.6f);
@@ -31,7 +30,6 @@ public class SoundOnImpact : MonoBehaviour
             else{
                 vol = Random.Range(0.04f,0.2f);
             }
-            Debug.Log(vol);
 
             diceAudio.PlaySound(vol);
             // source.PlayOneShot(clip);

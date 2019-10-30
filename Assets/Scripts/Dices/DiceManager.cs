@@ -88,6 +88,16 @@ public class DiceManager : MonoBehaviour
                 break;
             }
         }
+
+        if(result == 0){
+            Debug.Log("fuk u dice");
+            Vector3 force = new Vector3(5,5,0);
+            rb.AddForce(force, ForceMode.Impulse);
+            diceStopped = false;
+            return;
+        }
+
+
         textTemp.text = result.ToString();  // show result on button
         DiceParent.instance.GetResults(result, id); //send result forward
        
