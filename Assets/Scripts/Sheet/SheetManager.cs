@@ -89,7 +89,7 @@ public class SheetManager : MonoBehaviour
         {
             upperPoints += sl.points;
             CheckUpperLine();
-            upperBonusLine.UpperBonusUpdating(upperPoints);     //show upper points 
+            upperBonusLine.UpperBonusUpdating(upperPoints);     //show upper points in sheet
         }
         //if line is first yatzy
         if (sl.lineType == "yatzy" && !yatzyPlayed)
@@ -245,17 +245,20 @@ public class SheetManager : MonoBehaviour
 
     void LoadPlayedSheet()
     {
+        //getting data from saved sheet and assigning it to new sheet
+
         int playedRounds = 0;
         int pointsFromFile = 0;
         foreach (SavedSheetLine ssl in savedLines)
         {
-            if (ssl.hasBeenPlayed)
+            if (ssl.hasBeenPlayed)  //skip saved lines that have not been played
             {
                
                 foreach (SingleLine sl in sheetLines)
                 {
-                    if (ssl.lineType == sl.lineType)
+                    if (ssl.lineType == sl.lineType)    //matching saved lines with new lines
                     {
+                        //setting points
                         sl.SetPointsFromFile(ssl.points, ssl.extraPoints);
                         pointsFromFile += ssl.points;
                         pointsFromFile += ssl.extraPoints;
@@ -263,15 +266,17 @@ public class SheetManager : MonoBehaviour
                         {
                             upperPoints += ssl.points;
                         }
+                        //updating rounds
                         if(sl.lineType != "upBonus"){
                             playedRounds++;
                         }
-
-                        break;
+                        //no need to foreach the rest of the lines in not saved sheetlines after a match has been found. Move on to next saved line
+                        break;  
                     }
                 }
             }
         }
+        //setting other info
         GameManager.instance.playerInTurn.AddToPoints(pointsFromFile);
         GameManager.instance.currentRound += playedRounds;
         CheckUpperLine();

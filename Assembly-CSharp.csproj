@@ -55,9 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Flat Screen Transitions\Scripts\FSTDemoManager.cs" />
-     <Compile Include="Assets\Flat Screen Transitions\Scripts\LaunchURL.cs" />
-     <Compile Include="Assets\ScreenTransitionManager.cs" />
      <Compile Include="Assets\Scripts\Dices\DiceCollider.cs" />
      <Compile Include="Assets\Scripts\Dices\DiceManager.cs" />
      <Compile Include="Assets\Scripts\Dices\DiceParent.cs" />
@@ -69,6 +66,7 @@
      <Compile Include="Assets\Scripts\Menus\MenuManager.cs" />
      <Compile Include="Assets\Scripts\Menus\ScoreMenuManager.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\ScreenTransitionManager.cs" />
      <Compile Include="Assets\Scripts\Sheet\LineCalculator.cs" />
      <Compile Include="Assets\Scripts\Sheet\SheetManager.cs" />
      <Compile Include="Assets\Scripts\Sheet\SingleLine.cs" />

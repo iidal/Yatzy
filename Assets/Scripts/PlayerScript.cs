@@ -10,9 +10,7 @@ public class PlayerScript : MonoBehaviour
 {
     public int points = 0; //amount of points player has collected
     public TextMeshProUGUI playersPointsText; //show points in UI
-    //public List<string> linesPlayed = new List<string>();   //storing what lines have been played, not used correctly
 
-    
 
     void Start()
     {

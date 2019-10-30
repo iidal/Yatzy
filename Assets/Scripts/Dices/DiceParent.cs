@@ -255,6 +255,7 @@ public class DiceParent : MonoBehaviour
     }
 
     public SerializableVector3[] SaveDices(string posOrRot){
+        //saving the rotations and positions of the the dices at the time of saving, so they can be showed and gotten results from the same way as they were the first time
 
         SerializableVector3[] tempArray = new SerializableVector3[diceObjects.Length];
         int i =0;
@@ -286,7 +287,8 @@ public class DiceParent : MonoBehaviour
         }
     }
     public IEnumerator DicesLoaded(SerializableVector3[] loadedPos, SerializableVector3[] loadedRot){
-        Debug.Log("dice parent dices loaded");
+        //get saved rotations and positions and assign them to dices
+
         int i = 0;
         foreach(GameObject go in diceObjects){
             go.SetActive(true);

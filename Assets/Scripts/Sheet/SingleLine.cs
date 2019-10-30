@@ -109,6 +109,8 @@ public class SingleLine : MonoBehaviour
         labelText = tempObjs[0];
         scoreText = tempObjs[1];
         chosenScoreText = tempObjs[2];
+
+        //the last text object is different in normal lines and upper bonus lines
         if(lineType == "upBonus"){
             upperBonusCheckingText = tempObjs[3];
         }else{

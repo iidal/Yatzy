@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject GameDonePanel; // when game is finished show this, a new game can be started
     
-    public int[] testnums;
+    public int[] testnums;  //for testing when not getting results from dices but as input from inspector   (code for using them needs to be added again since for some reason commenting it out didnt seem to work....)
 
 
     private void Awake()
@@ -88,8 +88,11 @@ public class GameManager : MonoBehaviour
 
 
     public void SaveGame(){
-        List<SavedSheetLine>tempLines = SheetManager.instance.SavePlayedSheet();
+        //when leaving scene when game is not yet finished
+    
+        List<SavedSheetLine>tempLines = SheetManager.instance.SavePlayedSheet();    //SheetManager handles saving the sheet
         
+        //gathering info that is going to be saved
         int throwsTemp = DiceParent.instance.throwsUsed;
         bool yatzyPlayedTemp = SheetManager.instance.yatzyPlayed;
         bool yatzyPlayedZeroTemp = SheetManager.instance.yatzyZeroPoints;
@@ -97,8 +100,8 @@ public class GameManager : MonoBehaviour
         if(throwsTemp == 0) 
             collectedTemp = true;
         
-
-        SerializableVector3[] tempPositions = DiceParent.instance.SaveDices("position");
+        //getting dice positions and rotations from DiceParent that handles saving this data
+        SerializableVector3[] tempPositions = DiceParent.instance.SaveDices("position");  
         SerializableVector3[] tempRotations = DiceParent.instance.SaveDices("rotation");
 
         SaveLoad.SaveGameState(tempLines, throwsTemp, yatzyPlayedTemp, yatzyPlayedZeroTemp, collectedTemp, tempPositions, tempRotations);
@@ -113,6 +116,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+        //if a saved game has been found, proceed:
         DiceParent.instance.throwsUsed = tempState.throwsUsed;
         DiceParent.instance.SetThrowsLeftText();
         SheetManager.instance.yatzyZeroPoints = tempState.yatzyPlayedZero;
@@ -123,7 +127,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(DiceParent.instance.DicesLoaded(tempState.dicePositions, tempState.diceRotations));
             
         }
-        if(tempState.throwsUsed == throwsPerRound){
+        if(tempState.throwsUsed == throwsPerRound){ //if all throws have been used dont set throw button interactable
             DiceParent.instance.ThrowButton.interactable = false;
         }
      
