@@ -12,6 +12,7 @@ using System.Linq;
 public class SheetManager : MonoBehaviour
 {
     public static SheetManager instance;
+    public string sheetVersion = "YatzyLinesVer1";
 
     public Button playButton; //play a line 
 
@@ -175,7 +176,7 @@ public class SheetManager : MonoBehaviour
     {
         bool hasUpperBonus = false; //does the sheet contain line for upperbonus. if not, the game has as many rounds as the sheet has lines. if yes rounds = sheet length -1. checked after the for loop
 
-        TextAsset textAsset = Resources.Load<TextAsset>("YatzyLinesVer1");
+        TextAsset textAsset = Resources.Load<TextAsset>(sheetVersion);
         string[] lineArray = textAsset.text.Split('\n');
         sheetLines = new SingleLine[lineArray.Length];
         lineObjects = new GameObject[lineArray.Length];

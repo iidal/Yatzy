@@ -83,6 +83,7 @@
      <None Include="Assets\Resources\YatzyHowToPlay.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\Resources\YatzyLinesVer2.txt" />
      <None Include="Assets\Flat Screen Transitions\Read Me.txt" />
      <None Include="Assets\Resources\YatzyLinesVer1.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

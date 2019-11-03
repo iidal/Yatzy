@@ -1,0 +1,14 @@
+0-Ones-upper1-0
+1-Twos-upper2-0
+2-Threes-upper3-0
+3-Fours-upper4-0
+4-Fives-upper5-0
+5-Sixes-upper6-0
+6-Upper Bonus-upBonus-50
+7-3X-3X-0
+8-4X-4X-0
+9-Small Straight-sStraight-30
+10-Large Straight-lStraight-40
+11-Full House-house-25
+12-Random-random-0
+13-Yatzy-yatzy-50
