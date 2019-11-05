@@ -10,8 +10,8 @@ for showing top 10 scores
  */
 public class ScoreMenuManager : MonoBehaviour
 {
-    
-   // string scoresText;
+
+    // string scoresText;
     List<SavedResult> resultList = new List<SavedResult>(); //loaded results go here
     public TextMeshProUGUI[] textBlocks;
 
@@ -20,34 +20,45 @@ public class ScoreMenuManager : MonoBehaviour
         LoadScoreBoard();
     }
 
-    void LoadScoreBoard(){
+    void LoadScoreBoard()
+    {
 
 
         resultList = SaveLoad.LoadSoloScores();
-        
+
 
         //goes through the saved results (if there are any). sorts and puts them into a presentable form
 
         int i = 0;
-        if(resultList!=null){
-        
+        if (resultList != null)
+        {
+
             resultList.Sort((x, y) => y.result.CompareTo(x.result));
             int resultsCount = resultList.Count;
             Debug.Log(resultsCount);
-            foreach(TextMeshProUGUI t in textBlocks){
-                if(i < resultsCount){
-                    t.text = (i+1).ToString() + ". " +resultList[i].playerName.ToString() + " - " + resultList[i].result.ToString() + "\n";
+            foreach (TextMeshProUGUI t in textBlocks)
+            {
+                if (i < resultsCount)
+                {
+                    t.text = (i + 1).ToString() + ". " + resultList[i].playerName.ToString() + " - " + resultList[i].result.ToString() + "\n";
                 }
-                else{
-                    t.text = (i+1).ToString() + ".";
+                else
+                {
+                    t.text = (i + 1).ToString() + ".";
                 }
 
                 i++;
             }
-    
+
         }
-        else{
+        else
+        {
             Debug.Log("no scores");
+            foreach (TextMeshProUGUI t in textBlocks)
+            {
+                t.text = (i + 1).ToString() + ".";
+                i++;
+            }
         }
     }
 }
