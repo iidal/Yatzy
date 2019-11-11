@@ -10,12 +10,16 @@ public class ColliderButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
-    void OnMouseDown(){ //does this work on touch screen?
-        Debug.Log("clicked");
-        OnClick.Invoke();
+    void OnMouseDown()
+    { //does this work on touch screen?
+     
+        if (isActiveAndEnabled)
+        {
+            OnClick.Invoke();
+        }
     }
-   
+
 }

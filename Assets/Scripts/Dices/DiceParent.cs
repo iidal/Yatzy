@@ -18,8 +18,9 @@ public class DiceParent : MonoBehaviour
     public Button[] diceButtons;
     public Transform[] throwPositions = new Transform[2];   // positions on each side where the dices are thrown from (one for each player)
 
-    public Button ThrowButton;
-    public ColliderButton throwBut;
+    public Button ThrowButton;  //2D Button
+    public ColliderButton throwBut; //3D button
+
     public TextMeshProUGUI throwsLeftText;  //temporary maybe, shows how many throws left
     int throwsPerRound; //is gotten from game manager
     public int throwsUsed = 0;
@@ -105,8 +106,8 @@ public class DiceParent : MonoBehaviour
     }
     public IEnumerator Throw(int i) {
 
-        ThrowButton.interactable = false;
-        //throwBut.enabled = false;
+        //ThrowButton.interactable = false;
+        throwBut.enabled = false;
         SheetManager.instance.clickBlocker.SetActive(true); //sheet cant be touched when dices are moving
 
         //adjusting direction where to throw from throw pos. minus flips the direction so throws go to the bowl
@@ -213,16 +214,16 @@ public class DiceParent : MonoBehaviour
     }
 
     public void RoundEnded() {  //ie all throws have been used
-        ThrowButton.interactable = false;
-        //throwBut.enabled = false;
+        //ThrowButton.interactable = false;
+        throwBut.enabled = false;
         
     }
     public void StartNewRound() {
         StartCoroutine("HideDices"); // after round has been played dices are hidden (set active when throwing)
         throwsUsed = 0;
         throwsLeftText.text = "throws left: " + throwsPerRound.ToString();
-        ThrowButton.interactable = true; // can throw again
-        //throwBut.enabled = true;
+        //ThrowButton.interactable = true; // can throw again
+        throwBut.enabled = true;
         foreach (DiceManager dm in diceGMs) {
             if (dm.isLocked)    // unlock locked dices 
             {

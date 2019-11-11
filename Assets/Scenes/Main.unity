@@ -1575,7 +1575,7 @@ MonoBehaviour:
   - {fileID: 1047312096}
   - {fileID: 1568280223}
   ThrowButton: {fileID: 1520364596}
-  throwBut: {fileID: 0}
+  throwBut: {fileID: 1550916843}
   throwsLeftText: {fileID: 2026118347}
   throwsUsed: 0
   dicesThrown: 0
@@ -1719,37 +1719,37 @@ PrefabInstance:
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.26
+      value: 8.06
       objectReference: {fileID: 0}
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.31
+      value: 4.85
       objectReference: {fileID: 0}
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.51
+      value: -5.34
       objectReference: {fileID: 0}
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.15419143
+      value: 0.01779956
       objectReference: {fileID: 0}
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6410639
+      value: -0.45759162
       objectReference: {fileID: 0}
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.14453582
+      value: 0.18300205
       objectReference: {fileID: 0}
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7378153
+      value: 0.8699445
       objectReference: {fileID: 0}
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
@@ -1759,17 +1759,32 @@ PrefabInstance:
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 24.384
+      value: 11.446
       objectReference: {fileID: 0}
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -81.761
+      value: -53.675003
       objectReference: {fileID: 0}
     - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0.98100007
+      value: 17.953001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514619820809786242, guid: 17cd1864bac3abd4f8de68f594e25d21,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17cd1864bac3abd4f8de68f594e25d21, type: 3}
@@ -4033,7 +4048,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1520364597}
   m_OnClick:
     m_PersistentCalls:
