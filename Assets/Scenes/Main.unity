@@ -4247,6 +4247,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1973246934}
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PressDown
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!65 &1550916844
@@ -5370,6 +5381,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951465023}
   m_CullTransparentMesh: 0
+--- !u!95 &1973246934 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4183198026494363028, guid: 17cd1864bac3abd4f8de68f594e25d21,
+    type: 3}
+  m_PrefabInstance: {fileID: 261297425}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2003396926
 GameObject:
   m_ObjectHideFlags: 0
