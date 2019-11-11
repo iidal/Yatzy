@@ -129,6 +129,7 @@ public class SheetManager : MonoBehaviour
         if (!GameManager.instance.roundEnded && DiceParent.instance.throwsUsed != GameManager.instance.throwsPerRound)
         { //let player throw again once the dices have stopped moving, except when all throws have been used(round ended p much)
             DiceParent.instance.ThrowButton.interactable = true;
+            //DiceParent.instance.throwBut.enabled = true;
         }
     }
 

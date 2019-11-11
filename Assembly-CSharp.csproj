@@ -55,7 +55,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\DiceAudioManager.cs" />
+     <Compile Include="Assets\Scripts\Audio\DiceAudioManager.cs" />
+     <Compile Include="Assets\Scripts\Audio\SoundOnImpact.cs" />
      <Compile Include="Assets\Scripts\Dices\DiceCollider.cs" />
      <Compile Include="Assets\Scripts\Dices\DiceManager.cs" />
      <Compile Include="Assets\Scripts\Dices\DiceParent.cs" />
@@ -70,7 +71,7 @@
      <Compile Include="Assets\Scripts\Sheet\LineCalculator.cs" />
      <Compile Include="Assets\Scripts\Sheet\SheetManager.cs" />
      <Compile Include="Assets\Scripts\Sheet\SingleLine.cs" />
-     <Compile Include="Assets\Scripts\SoundOnImpact.cs" />
+     <Compile Include="Assets\Scripts\Tools\ColliderButton.cs" />
      <Compile Include="Assets\Scripts\Tools\DelayTimer.cs" />
      <Compile Include="Assets\Scripts\Tools\EditorComment.cs" />
      <Compile Include="Assets\Scripts\Tools\LoadScene.cs" />
