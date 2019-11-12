@@ -6,10 +6,15 @@ using UnityEngine.Events;
 public class ColliderButton : MonoBehaviour
 {
     public UnityEvent OnClick;
+    public UnityEvent OnClickRelease;
 
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    void Update(){
 
     }
 
@@ -21,5 +26,6 @@ public class ColliderButton : MonoBehaviour
             OnClick.Invoke();
         }
     }
+    
 
 }

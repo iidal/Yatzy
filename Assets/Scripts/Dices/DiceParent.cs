@@ -18,8 +18,10 @@ public class DiceParent : MonoBehaviour
     public Button[] diceButtons;
     public Transform[] throwPositions = new Transform[2];   // positions on each side where the dices are thrown from (one for each player)
 
-    public Button ThrowButton;  //2D Button
+    //public Button ThrowButton;  //2D Button
     public ColliderButton throwBut; //3D button
+    [HideInInspector]
+    public Animator throwButtonAnimator;
 
     public TextMeshProUGUI throwsLeftText;  //temporary maybe, shows how many throws left
     int throwsPerRound; //is gotten from game manager
@@ -46,6 +48,7 @@ public class DiceParent : MonoBehaviour
     {
         CreateDices();
         throwsPerRound = GameManager.instance.throwsPerRound;
+        throwButtonAnimator = throwBut.GetComponentInParent<Animator>();
     }
     
     void CreateDices()
@@ -108,6 +111,7 @@ public class DiceParent : MonoBehaviour
 
         //ThrowButton.interactable = false;
         throwBut.enabled = false;
+        
         SheetManager.instance.clickBlocker.SetActive(true); //sheet cant be touched when dices are moving
 
         //adjusting direction where to throw from throw pos. minus flips the direction so throws go to the bowl
@@ -171,6 +175,8 @@ public class DiceParent : MonoBehaviour
         if (throwsUsed == throwsPerRound) {         //if all throws used, round is ending
             RoundEnded();  
             GameManager.instance.roundEnded = true;
+            yield return new WaitUntil(()=> throwButtonAnimator.GetCurrentAnimatorStateInfo(0).IsName("PressUp"));
+            throwButtonAnimator.Play("ButtonOut");
         }
         
     }
@@ -217,6 +223,7 @@ public class DiceParent : MonoBehaviour
         //ThrowButton.interactable = false;
         throwBut.enabled = false;
         
+        
     }
     public void StartNewRound() {
         StartCoroutine("HideDices"); // after round has been played dices are hidden (set active when throwing)
@@ -224,6 +231,8 @@ public class DiceParent : MonoBehaviour
         throwsLeftText.text = "throws left: " + throwsPerRound.ToString();
         //ThrowButton.interactable = true; // can throw again
         throwBut.enabled = true;
+        throwButtonAnimator.Play("ButtonIn");
+
         foreach (DiceManager dm in diceGMs) {
             if (dm.isLocked)    // unlock locked dices 
             {

@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
         if(tempState.throwsUsed == throwsPerRound){ //if all throws have been used dont set throw button interactable
             //DiceParent.instance.ThrowButton.interactable = false;
             DiceParent.instance.throwBut.enabled = false;
+           
         }
      
     
