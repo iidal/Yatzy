@@ -111,6 +111,7 @@ public class DiceParent : MonoBehaviour
 
         //ThrowButton.interactable = false;
         throwBut.enabled = false;
+        throwButtonAnimator.Play("ColorDisabled");
         
         SheetManager.instance.clickBlocker.SetActive(true); //sheet cant be touched when dices are moving
 
@@ -177,6 +178,7 @@ public class DiceParent : MonoBehaviour
             GameManager.instance.roundEnded = true;
             yield return new WaitUntil(()=> throwButtonAnimator.GetCurrentAnimatorStateInfo(0).IsName("PressUp"));
             throwButtonAnimator.Play("ButtonOut");
+            throwButtonAnimator.Play("ColorDisabled");
         }
         
     }
@@ -222,6 +224,8 @@ public class DiceParent : MonoBehaviour
     public void RoundEnded() {  //ie all throws have been used
         //ThrowButton.interactable = false;
         throwBut.enabled = false;
+        throwButtonAnimator.Play("ColorDisabled");
+
         
         
     }
@@ -231,7 +235,10 @@ public class DiceParent : MonoBehaviour
         throwsLeftText.text = "throws left: " + throwsPerRound.ToString();
         //ThrowButton.interactable = true; // can throw again
         throwBut.enabled = true;
-        throwButtonAnimator.Play("ButtonIn");
+        if(throwButtonAnimator.GetCurrentAnimatorStateInfo(0).IsName("ButtonOut")){
+            throwButtonAnimator.Play("ButtonIn");
+        }
+        throwButtonAnimator.Play("ColorEnabled");
 
         foreach (DiceManager dm in diceGMs) {
             if (dm.isLocked)    // unlock locked dices 
