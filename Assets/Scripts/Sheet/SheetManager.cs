@@ -15,7 +15,8 @@ public class SheetManager : MonoBehaviour
     public string sheetVersion = "YatzyLinesVer1";
 
     public Button playButton; //play a line 
-
+    public Animator playButtonAnimator; // for using the 3D button
+    public ColliderButton playBut; // 3DButton
     public int[] currentDices = new int[5];    //current dice row
 
     public SingleLine[] sheetLines; //scripts for the lines
@@ -52,7 +53,11 @@ public class SheetManager : MonoBehaviour
     }
     private void Start()
     {
-        playButton.interactable = false;
+        //playButton.interactable = false;
+
+        playBut.enabled = false;
+        playButtonAnimator.Play("ColorDisabled");
+
         clickBlocker.SetActive(true);
 
         CreateSheet();    //get lines from a text file and set up everything
@@ -131,7 +136,7 @@ public class SheetManager : MonoBehaviour
             //DiceParent.instance.ThrowButton.interactable = true;
             DiceParent.instance.throwBut.enabled = true;
             DiceParent.instance.throwButtonAnimator.Play("ColorEnabled");
-           
+
         }
     }
 
@@ -158,9 +163,17 @@ public class SheetManager : MonoBehaviour
     public void CheckPlayButton()
     { //should the play button be interactable (is some line chosen)
         if (lineToggleGroup.AnyTogglesOn() == true)
-            playButton.interactable = true;
+        {
+            //playButton.interactable = true;
+            playBut.enabled = true;
+            playButtonAnimator.Play("ColorEnabled");
+        }
         else
-            playButton.interactable = false;
+        {
+            //playButton.interactable = false;
+            playBut.enabled = false;
+            playButtonAnimator.Play("ColorDisabled");
+        }
 
     }
 
@@ -257,7 +270,7 @@ public class SheetManager : MonoBehaviour
         {
             if (ssl.hasBeenPlayed)  //skip saved lines that have not been played
             {
-               
+
                 foreach (SingleLine sl in sheetLines)
                 {
                     if (ssl.lineType == sl.lineType)    //matching saved lines with new lines
@@ -271,11 +284,12 @@ public class SheetManager : MonoBehaviour
                             upperPoints += ssl.points;
                         }
                         //updating rounds
-                        if(sl.lineType != "upBonus"){
+                        if (sl.lineType != "upBonus")
+                        {
                             playedRounds++;
                         }
                         //no need to foreach the rest of the lines in not saved sheetlines after a match has been found. Move on to next saved line
-                        break;  
+                        break;
                     }
                 }
             }
