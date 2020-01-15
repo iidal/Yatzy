@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.448443, g: 0.49847406, b: 0.5756339, a: 1}
+  m_IndirectSpecularColor: {r: 0.44843674, g: 0.49847358, b: 0.5756289, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2494,7 +2494,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.3509887e-38, y: 4.5918e-41, z: 0, w: 2.3509887e-38}
+  m_BoundingSphereOverride: {x: 4.5905e-41, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2505,13 +2505,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.83691156, y: 0.0533275, z: 0.32307097, w: 0.43858904}
+  m_LocalRotation: {x: 0.8909676, y: 0.2518086, z: -0.10474801, w: 0.3630385}
   m_LocalPosition: {x: 0, y: 4.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 135.6, y: -55.32, z: -31.438002}
+  m_LocalEulerAnglesHint: {x: 135.6, y: 0.3059845, z: -31.437988}
 --- !u!1 &790335058
 GameObject:
   m_ObjectHideFlags: 0
@@ -6304,15 +6304,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8252895858600183214}
-  m_LocalRotation: {x: -0.10426653, y: -0.7006323, z: 0.00018217103, w: 0.7058633}
-  m_LocalPosition: {x: -6.77, y: 7.54, z: -6.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.018515432, y: -0.77776587, z: -0.11913017, w: 0.6168837}
+  m_LocalPosition: {x: -7.44, y: 6.22, z: -6.6}
+  m_LocalScale: {x: 1.013077, y: 1.013077, z: 1.013077}
   m_Children:
   - {fileID: 758835494832024826}
   - {fileID: 8923628324658729434}
   m_Father: {fileID: 0}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: -8.450001, y: -90.204, z: 8.509001}
+  m_LocalEulerAnglesHint: {x: -12.014001, y: -102.43001, z: -6.9400005}
 --- !u!1 &5435846620523364481
 GameObject:
   m_ObjectHideFlags: 0
