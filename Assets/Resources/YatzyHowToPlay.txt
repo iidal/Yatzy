@@ -6,8 +6,6 @@ Four - Total number of fours times 4
 Five - Total number of fives times 5
 Six - Total number of sixes times 6
 Bonus - You get 50 points in bonus if the total score of One through Six is more than 62
-Pair - Two dices with the same number
-Two Pairs - Two sets of a pair
 Three Same - Three same numbers
 Four Same - Four same numbers
 Small Straight - Four numbers in order
