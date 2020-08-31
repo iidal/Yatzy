@@ -1,0 +1,17 @@
+You get 3 throws to try and get lines shown in the sheet.<br>You can lock dices by tapping on the dice or it's button on the bottom of the screen.
+/One - Total number of ones
+Two - Total number of twos times 2
+Three - Total number of threes times 3
+Four - Total number of fours times 4
+Five - Total number of fives times 5
+Six - Total number of sixes times 6
+Bonus - You get 50 points in bonus if the total score of One through Six is more than 62
+Three Same - Three same numbers
+Four Same - Four same numbers
+Small Straight - Four numbers in order
+Large Straight - Five numbers in order
+Full House - One pair and three same numbers
+Random - All dices counted together, no requirements for this line
+Yatzy - All dices have the same number
+/After getting and playing a Yatzy you can get extra 50 points for getting a Yatzy again.<br>If you have played 0 points on Yatzy, you will not receive extra points from later yatzys.
+/Your progress will be saved if you exit the game.
